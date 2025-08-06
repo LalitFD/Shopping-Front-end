@@ -1,0 +1,159 @@
+.login-page {
+    display: flex;
+    width: 900px;
+    height: 550px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: white 1px solid;
+    overflow: hidden;
+}
+
+
+.login-left {
+    flex: 1;
+    background: #000000;
+    color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.login-left .logo {
+    color: #4ade80;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.login-left p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.login-left .green {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.login-left strong {
+    color: #4ade80;
+}
+
+.login-left .subtext {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #cccccc;
+}
+
+.login-img {
+    max-width: 250px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.login-right {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-right h3 {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.login-right h2 {
+    font-size: 2.2rem;
+    margin: 0.5rem 0 2rem 0;
+    color: #000;
+    font-weight: 700;
+}
+
+.login-right form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-right input {
+    padding: 15px 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.3s ease;
+    box-shadow: 5px 5px 5px gray
+}
+
+.login-right input:focus {
+    outline: none;
+    border-color: #4ade80;
+}
+
+.login-right input::placeholder {
+    color: #999;
+}
+
+.login-right button {
+    padding: 15px;
+    background-color: #1a202c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.login-right button:hover {
+    background-color: #2d3748;
+}
+
+.login-right .signup-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #666;
+}
+
+.login-right .signup-link span {
+    font-weight: 600;
+    cursor: pointer;
+    color: #000;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .login-page {
+        width: 90%;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .login-left {
+        padding: 2rem;
+    }
+
+    .login-img {
+        position: static;
+        align-self: center;
+        margin-top: 2rem;
+        max-width: 200px;
+    }
+
+    .login-right {
+        padding: 2rem;
+    }
+}

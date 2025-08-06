@@ -1,0 +1,112 @@
+.contact-section {
+    margin-top: 50px;
+    padding: 40px;
+    background: #000;
+    color: #fff;
+    font-family: sans-serif;
+}
+
+.contact-section h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.contact-section .highlight {
+    color: #6ef58c;
+}
+
+.contact-section p {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+}
+
+.contact-info h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.info-item .icon {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.why-choose {
+    background: #0d1117;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.why-choose h4 {
+    margin-bottom: 10px;
+}
+
+.why-choose ul {
+    padding-left: 20px;
+}
+
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    background: #0d1117;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.contact-form h3 {
+    margin-bottom: 20px;
+}
+
+.contact-form .row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #1a1e26;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.contact-form button {
+    background: #52ff7e;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    width: 100%;
+}

@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: #000;
+}
+
+.create-post-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;       
+    padding: 40px;
+    margin-left: 280px;        
+}
+
+.create-post-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.create-post-subtitle {
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.create-post-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 500px;              /* fixed width */
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #000;
+}
+
+.profile-username {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.post-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px 0;
+    resize: none;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upload-icon {
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+}
+
+.publish-btn {
+    background-color: #4ade80;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.publish-btn:hover {
+    opacity: 0.9;
+}
