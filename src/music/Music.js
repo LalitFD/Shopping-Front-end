@@ -71,7 +71,7 @@ function Music() {
 
     const getTracks = async () => {
         if (!searchQuery.trim()) return;
-        
+
         setIsLoading(true);
         try {
             const response = await fetch(`https://v1.nocodeapi.com/being_lalit/spotify/xHIuUORirotindMR/search?q=${searchQuery}&type=track`);
@@ -104,8 +104,8 @@ function Music() {
                         onKeyPress={handleKeyPress}
                         disabled={isLoading}
                     />
-                    <button 
-                        className="musicBtn musicBtnSuccess" 
+                    <button
+                        className="musicBtn musicBtnSuccess"
                         onClick={getTracks}
                         disabled={isLoading || !searchQuery.trim()}
                     >

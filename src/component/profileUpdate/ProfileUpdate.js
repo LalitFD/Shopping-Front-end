@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './ProfileUpdate.module.css';
 
 import { useNavigate } from 'react-router-dom';
+import End_Points from '../../api/End_Points';
 
 function ProfileUpdate() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ function ProfileUpdate() {
         formData.append("imageName", selectedFile);
 
         try {
-            const response = await axios.post("http://localhost:3000/profile", formData, {
+            const response = await axios.post(End_Points.PROFILE_UPDATE, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true
             });

@@ -33,7 +33,7 @@ function Main() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/getAllPost");
+                const response = await axios.get(End_Points.GET_ALL_POST);
                 console.log("API response:", response.data);
                 setPosts(response.data.posts);
             } catch (error) {
@@ -48,7 +48,7 @@ function Main() {
 
     const handleDelete = async (postId) => {
         try {
-            await axios.delete(`http://localhost:3000/api/deletePost/${postId}`, {
+            await axios.delete(`${End_Points.DELETE_POST}${postId}`, {
                 withCredentials: true,
             });
 

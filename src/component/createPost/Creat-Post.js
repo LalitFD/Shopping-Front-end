@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import End_Points from "../../api/End_Points";
 
 
 function CreatePost() {
@@ -33,8 +34,7 @@ function CreatePost() {
             formData.append("media", media);
             formData.append("caption", caption);
 
-            const res = await axios.post(
-                "http://localhost:3000/api/createPost",
+            const res = await axios.post(End_Points.CREATE_POST,
                 formData,
                 {
                     withCredentials: true,

@@ -5,12 +5,13 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import photo from "./userProfile.jpeg"
+import End_Points from "../../api/End_Points";
 
 function Discover() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
-     const [followLoading, setFollowLoading] = useState(null);
+    const [followLoading, setFollowLoading] = useState(null);
 
     const handleSearch = async () => {
         if (!query.trim()) {
@@ -20,7 +21,7 @@ function Discover() {
 
         try {
             setLoading(true);
-            const res = await axios.get(`http://localhost:3000/searchUsers`, {
+            const res = await axios.get(End_Points.DISCOVER, {
                 params: { query },
                 withCredentials: true,
             });
@@ -40,7 +41,9 @@ function Discover() {
             setFollowLoading(userId);
 
             const res = await axios.post(
-                `http://localhost:3000/follow/${userId}`,
+                `${End_Points.FOLLOW}${userId}`,
+
+
                 {},
                 { withCredentials: true }
             );

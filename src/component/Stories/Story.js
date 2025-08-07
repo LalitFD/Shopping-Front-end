@@ -1,6 +1,7 @@
 import React from "react";
 import "./Story.css";
-const BASE_URL = "http://localhost:3000";
+import End_Points from "../../api/End_Points";
+const BASE_URL = End_Points.BASE_URL;
 
 
 function Story({ story, onClose }) {
@@ -18,15 +19,17 @@ function Story({ story, onClose }) {
 
                 <div className="story-media">
                     {story.media.type.replace(/"/g, "") === "image" ? (
+
                         <img
-                            src={`http://localhost:3000${story.media.url}`}
+                            src={`${BASE_URL}${story.media.url}`}
                             alt="story"
                             className="story-img"
                         />
 
+
                     ) : (
                         <video
-                            src={`http://localhost:3000${story.media.url}`}
+                            src={`${BASE_URL}${story.media.url}`}
                             className="story-video"
                             autoPlay
                             controls

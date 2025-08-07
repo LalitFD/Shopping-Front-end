@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import mahakal from "./m.jpg";
 import axios from "axios";
 import EditProfile from "../editProfile/EditProfile";
+import End_Points from "../../api/End_Points";
 
 function Profile() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Profile() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/getPost", {
+                const response = await axios.get(End_Points.SINGLE_POST, {
                     withCredentials: true
                 });
                 console.log(response.data.posts);
@@ -53,9 +54,10 @@ function Profile() {
                                 onClick={() => navigate("/profileUpdate")}
                                 src={
                                     userData?.profile?.imageName
-                                        ? `http://localhost:3000/public/profile/${userData.profile.imageName}`
+                                        ? `${End_Points.PROFILE_IMAGE}/${userData.profile.imageName}`
                                         : mahakal
                                 }
+
                                 alt="Profile"
                                 style={{
                                     width: "80px",

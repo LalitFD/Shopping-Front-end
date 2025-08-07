@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import End_Points from "../../api/End_Points";
 
 function EditProfile() {
 
@@ -17,7 +18,7 @@ function EditProfile() {
 
         try {
             const res = await axios.put(
-                "http://localhost:3000/update",
+                End_Points.EDIT_PROFILE,
                 { name, username, bio },
                 { withCredentials: true }
             );

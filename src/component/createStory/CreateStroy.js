@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import End_Points from "../../api/End_Points";
 
 
 function CreateStory() {
@@ -35,7 +36,7 @@ function CreateStory() {
             formData.append("duration", duration);
 
             const res = await axios.post(
-                "http://localhost:3000/story/create",
+                End_Points.CREATE_STORY,
                 formData,
                 {
                     withCredentials: true,
