@@ -48,7 +48,7 @@ function Main() {
 
     const handleDelete = async (postId) => {
         try {
-            await axios.delete(`${End_Points.DELETE_POST}${postId}`, {
+            await axios.delete(`${End_Points.DELETE_POST}/${postId}`, {
                 withCredentials: true,
             });
 
