@@ -3,8 +3,11 @@ import "./EditProfile.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function EditProfile() {
+
+    const navigate = useNavigate()
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [bio, setBio] = useState("");
@@ -16,13 +19,17 @@ function EditProfile() {
             const res = await axios.put(
                 "http://localhost:3000/update",
                 { name, username, bio },
-                { withCredentials: true } 
+                { withCredentials: true }
             );
 
+            const updatedUser = res.data.updatedUser;
+            sessionStorage.setItem("Social-User", JSON.stringify(updatedUser));
+
             toast.success("Profile Updated Successfully!");
-            console.log("Updated Profile:", res.data.updatedUser);
+            navigate("/profile")
+
+            console.log("Updated Profile:", updatedUser);
         } catch (err) {
-            // Axios error handling
             const errorMessage = err.response?.data?.message || "Something went wrong!";
             toast.error(errorMessage);
             console.error(err);

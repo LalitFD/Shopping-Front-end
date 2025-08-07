@@ -20,7 +20,7 @@ function Profile() {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get("http://localhost:3000/api/getPost", {
-                    withCredentials: true // cookie/session ke liye zaruri
+                    withCredentials: true
                 });
                 console.log(response.data.posts);
                 setPosts(response.data.posts);
@@ -48,12 +48,25 @@ function Profile() {
 
                     <div className="profile-info">
                         <div className="profile-avatar" style={{ position: "relative", top: "-20px" }}>
-                            <img
-                                src={mahakal}
 
+                            <img
+                                onClick={() => navigate("/profileUpdate")}
+                                src={
+                                    userData?.profile?.imageName
+                                        ? `http://localhost:3000/public/profile/${userData.profile.imageName}`
+                                        : mahakal
+                                }
                                 alt="Profile"
-                                style={{ width: "80px", height: "80px", borderRadius: "50%", cursor: "pointer" }}
+                                style={{
+                                    width: "80px",
+                                    height: "80px",
+                                    borderRadius: "50%",
+                                    cursor: "pointer",
+                                    objectFit: "cover"
+                                }}
                             />
+
+
                         </div>
 
                         <div className="profile-details">

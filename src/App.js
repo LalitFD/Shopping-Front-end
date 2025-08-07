@@ -16,6 +16,7 @@ import Discover from './component/discover/discover.js';
 import EditProfile from './component/editProfile/EditProfile.js';
 import Notification from './component/notification/Notification.js';
 import Music from './music/Music.js';
+import ProfileUpdate from './component/profileUpdate/ProfileUpdate.js';
 // import Reel from './component/reel/Reel.js';
 
 
@@ -35,6 +36,7 @@ function App() {
       <Route path='/editProfile' element={<EditProfile />} />
       <Route path='/Notification' element={<Notification />} />
       <Route path='/Music' element={<Auth><Music /></Auth>} />
+      <Route path='/profileUpdate' element={<ProfileUpdate />} />
       {/* <Route path='/reel' element={<Reel />} /> */}
     </Routes>
 
