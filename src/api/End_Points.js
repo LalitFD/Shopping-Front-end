@@ -1,4 +1,5 @@
 export const BASE_URL = "https://shopping-beck-end.onrender.com";
+// https://shopping-beck-end.onrender.com
 
 export default {
     SIGN_UP: BASE_URL + "/register",
