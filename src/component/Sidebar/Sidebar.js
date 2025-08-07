@@ -6,7 +6,7 @@ function Sidebar() {
     const navigate = useNavigate();
     return (
         <div className="sidebar" style={{ height: "585px", marginLeft: "-2px" }}>
-            <div className="logo" onClick={() => navigate("/Main")} style={{cursor:"pointer"}}>Social</div>
+            <div className="logo" onClick={() => navigate("/Main")} style={{ cursor: "pointer" }}>Social</div>
 
             <NavLink
                 to="/Main"
@@ -32,12 +32,21 @@ function Sidebar() {
                 Messages
             </NavLink>
 
+
             <NavLink
-                to="/notifications"
+                to="/Music"
                 className={({ isActive }) => isActive ? "sidebar-item active" : "sidebar-item"}
             >
-                <span className="sidebar-item-icon"><i className="bi bi-bell"></i></span>
-                Notifications
+                <span className="sidebar-item-icon"><i className="bi bi-music-note-beamed"></i></span>
+                Music
+            </NavLink>
+
+            <NavLink
+                to="/Notification"
+                className={({ isActive }) => isActive ? "sidebar-item active" : "sidebar-item"}
+            >
+                <span className="sidebar-item-icon"><i className="bi bi-people-fill"></i></span>
+                Connections
             </NavLink>
 
             <NavLink

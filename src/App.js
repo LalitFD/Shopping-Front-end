@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import './App.css';
 import { Router, Routes, Route } from 'react-router-dom';
@@ -12,6 +14,9 @@ import CreatePost from './component/createPost/Creat-Post.js';
 import CreateStroy from './component/createStory/CreateStroy.js';
 import Discover from './component/discover/discover.js';
 import EditProfile from './component/editProfile/EditProfile.js';
+import Notification from './component/notification/Notification.js';
+import Music from './music/Music.js';
+// import Reel from './component/reel/Reel.js';
 
 
 function App() {
@@ -28,6 +33,8 @@ function App() {
       <Route path='/createStory' element={<CreateStroy />} />
       <Route path='/discover' element={<Discover />} />
       <Route path='/editProfile' element={<EditProfile />} />
+      <Route path='/Notification' element={<Notification />} />
+      <Route path='/Music' element={<Auth><Music /></Auth>} />
       {/* <Route path='/reel' element={<Reel />} /> */}
     </Routes>
 

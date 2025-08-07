@@ -9,13 +9,13 @@ function Message() {
             <div className="message-container">
                 <div className="sidebar-column">
                     <div className="sidebar-icons">
-                        <button onClick={()=>nevigate("/Main")}><i class="bi bi-house-heart"></i></button>
-                        {/* <button><i class="bi bi-search"></i></button> */}
-                        {/* <button><i class="bi bi-file-earmark-play"></i></button> */}
-                        {/* <button><i class="bi bi-chat"></i></button> */}
-                        {/* <button><i class="bi bi-bell"></i></button> */}
-                        <button onClick={()=>nevigate("/profile")}><i class="bi bi-person"></i></button>
-                        {/* <button><i class="bi bi-plus-circle"></i></button> */}
+                        <button onClick={()=>nevigate("/Main")}><i className="bi bi-house-heart"></i></button>
+                        {/* <button><i className="bi bi-search"></i></button> */}
+                        {/* <button><i className="bi bi-file-earmark-play"></i></button> */}
+                        {/* <button><i className="bi bi-chat"></i></button> */}
+                        {/* <button><i className="bi bi-bell"></i></button> */}
+                        <button onClick={()=>nevigate("/profile")}><i className="bi bi-person"></i></button>
+                        {/* <button><i className="bi bi-plus-circle"></i></button> */}
                     </div>
                 </div>
 
@@ -25,31 +25,31 @@ function Message() {
                     <div className="message-list-label">Message ...</div>
                     <div className="chat-list">
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         <div className="chat-item">
-                            <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                            <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                             <span>Rohit_Arwal_767</span>
                         </div>
                         
@@ -58,11 +58,11 @@ function Message() {
 
                 <div className="chat-window-column">
                     <div className="chat-topbar">
-                        <div className="chat-avatar"><i class="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
+                        <div className="chat-avatar"><i className="bi bi-person" style={{ marginLeft: "9px", position: 'relative', top: "6px" }}></i></div>
                         <span className="chat-username">Rohit_Arwal_767</span>
                         <div className="chat-actions">
-                            <span><i class="bi bi-telephone"></i></span>
-                            <span><i class="bi bi-camera-video"></i></span>
+                            <span><i className="bi bi-telephone"></i></span>
+                            <span><i className="bi bi-camera-video"></i></span>
                         </div>
                     </div>
                     <div className="chat-body">

@@ -16,21 +16,21 @@ function Profile() {
     const [posts, setPosts] = useState([]);
     console.log("all posts", posts);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-        try {
-            const response = await axios.get("http://localhost:3000/api/getPost", {
-                withCredentials: true // cookie/session ke liye zaruri
-            });
-            console.log(response.data.posts);
-            setPosts(response.data.posts);
-        } catch (error) {
-            console.error("Error fetching posts:", error);
-        }
-    };
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/api/getPost", {
+                    withCredentials: true // cookie/session ke liye zaruri
+                });
+                console.log(response.data.posts);
+                setPosts(response.data.posts);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        };
 
-    fetchPosts();
-}, []);
+        fetchPosts();
+    }, []);
 
     const handleLogOut = () => {
         sessionStorage.setItem("Social-User", "");
@@ -50,8 +50,9 @@ function Profile() {
                         <div className="profile-avatar" style={{ position: "relative", top: "-20px" }}>
                             <img
                                 src={mahakal}
+
                                 alt="Profile"
-                                style={{ width: "80px", height: "80px", borderRadius: "50%" }}
+                                style={{ width: "80px", height: "80px", borderRadius: "50%", cursor: "pointer" }}
                             />
                         </div>
 
@@ -99,12 +100,47 @@ function Profile() {
                     <div className="AllPost">
                         {posts.map((post, index) => (
                             <div className="post" key={post.id || index}>
-                                <img
-                                    src={post.media?.[0]?.url}
-                                    alt={`Post ${index + 1}`}
-                                />
+                                {post.media && post.media.length > 0 ? (
+                                    post.media[0].type === 'video' ? (
+                                        <video
+                                            controls
+                                            style={{
+                                                width: '100%',
+                                                height: '200px',
+                                                objectFit: 'cover',
+                                                borderRadius: '8px'
+                                            }}
+                                        >
+                                            <source src={post.media[0].url} type="video/mp4" />
+                                            Your browser does not support video.
+                                        </video>
+                                    ) : (
+                                        <img
+                                            src={post.media[0].url}
+                                            alt={`Post ${index + 1}`}
+                                            style={{
+                                                width: '100%',
+                                                height: '200px',
+                                                objectFit: 'cover',
+                                                borderRadius: '8px'
+                                            }}
+                                        />
+                                    )
+                                ) : (
+                                    <div style={{
+                                        width: '100%',
+                                        height: '200px',
+                                        backgroundColor: '#f0f0f0',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        borderRadius: '8px',
+                                        color: '#666'
+                                    }}>
+                                        No Media
+                                    </div>
+                                )}
                             </div>
-
                         ))}
                     </div>
                 </div>

@@ -174,6 +174,7 @@ body {
 .stat-number {
     font-weight: 600;
     font-size: 16px;
+    color: white;
 }
 
 .stat-label {
@@ -186,9 +187,10 @@ body {
 }
 
 .name {
-    font-weight: 500;
+    font-weight: 100;
     color: rgb(0, 255, 89);
     margin-bottom: 5px;
+    font-size: 14px;
 }
 
 .description {

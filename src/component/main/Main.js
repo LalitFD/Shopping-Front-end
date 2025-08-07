@@ -154,9 +154,34 @@ function Main() {
                                     {/* Post Image */}
                                     <div className="dashboard-post-media">
                                         {post.media && post.media.length > 0 ? (
-                                            <img src={post.media?.[0]?.url} alt="Post" />
+                                            post.media[0].type === 'video' ? (
+                                                <video
+                                                    controls
+                                                    style={{
+                                                        width: '100%',
+                                                        maxHeight: '400px',
+                                                        borderRadius: '8px'
+                                                    }}
+                                                >
+                                                    <source src={post.media[0].url} type="video/mp4" />
+                                                    Your browser does not support video.
+                                                </video>
+                                            ) : post.media[0].type === 'image' ? (
+                                                <img
+                                                    src={post.media[0].url}
+                                                    alt="Post"
+                                                    style={{
+                                                        width: '100%',
+                                                        maxHeight: '400px',
+                                                        objectFit: 'cover',
+                                                        borderRadius: '8px'
+                                                    }}
+                                                />
+                                            ) : (
+                                                <p>Unsupported media type</p>
+                                            )
                                         ) : (
-                                            <p>No Image</p>
+                                            <p>No Media</p>
                                         )}
                                     </div>
 

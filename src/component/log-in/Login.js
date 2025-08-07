@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import End_Points from "../../api/End_Points";
 import { toast, ToastContainer } from "react-toastify";
+// import { GoogleLogin } from "@react-oauth/google";
+// import { jwtDecode } from "jwt-decode";
+
 
 function Login() {
     const navigate = useNavigate();
@@ -59,8 +62,8 @@ function Login() {
                     </p> */}
 
                     {/* iam adding one beautiful image  */}
-                    
-                    
+
+
                     <img
                         src="https://i.pinimg.com/736x/57/65/de/5765de283e421d5d07548a897f584e52.jpg"
                         alt="Login Illustration"
@@ -90,10 +93,43 @@ function Login() {
                         />
                         <button type="submit">LOGIN</button>
                     </form>
-                    <p className="signup-link">
+                    <div className="signup-link">
+
                         Don’t have an account?{" "}
                         <Link to="/sign-up" style={{ color: "green", textDecoration: "none" }}>Sign Up</Link>
-                    </p>
+
+
+                        {/* <GoogleLogin
+                            onSuccess={(credentialResponse) => {
+                                const token = credentialResponse.credential;
+                                const decoded = jwtDecode(token);
+                                console.log("Google Login Success", decoded);
+
+                                axios
+                                    .post("http://localhost:3000/google-login", {
+                                        token,
+                                    })
+                                    .then((res) => {
+                                        console.log(res.data);
+
+                                        // Store token or user info
+                                        sessionStorage.setItem("Social-User", JSON.stringify(res.data.user));
+
+                                        toast.success("Google login successful!"); 
+                                        navigate("/"); 
+                                    })
+                                    .catch((err) => {
+                                        console.error("Login error", err);
+                                        toast.error("Google login failed!");
+                                    });
+                            }}
+                            onError={() => {
+                                console.log("Login Failed");
+                                toast.error("Google login failed!");
+                            }}
+                        /> */}
+
+                    </div>
                 </div>
             </div>
         </>

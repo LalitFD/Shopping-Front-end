@@ -6,7 +6,7 @@ import { useState } from "react";
 import End_Points from "../../api/End_Points";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+// import { GoogleLogin } from "@react-oauth/google";
 function Sign() {
     const nevigate = useNavigate();
 
@@ -123,8 +123,23 @@ function Sign() {
                             </form>
                             <p className="signup-link">
                                 Already have an account?{" "}
-                                <Link to="/log-in" className="login-link">Log-In</Link>
+                                <Link to="/log-in" className="login-link" style={{ marginRight: "10px" }}>Log-In</Link>
+
+
+                                {/* <GoogleLogin
+                                    onSuccess={(credentialResponse) => {
+                                        console.log("Google Login Success", credentialResponse);
+                                        nevigate("/log-in");
+                                    }}
+                                    onError={() => {
+                                        console.log("Login Failed");
+                                    }}
+                                    theme="outline"
+                                    size="small"
+                                /> */}
                             </p>
+
+
                         </>
                     )}
                 </div>
