@@ -65,11 +65,11 @@ function Discover() {
 
     return (
         <div className="discover-page">
-            <div className="container" style={{ marginLeft: "-290px" }}>
+            <div className="container" style={{marginLeft:"-17vw",marginRight:"-9vw"}}>
                 <Sidebar />
             </div>
 
-            <div className="discover-main">
+            <div className="discover-main" style={{}}>
                 <h2 className="discover-title">Search People</h2>
                 <p className="discover-subtitle">
                     Connect with amazing people and grow your network
@@ -101,7 +101,7 @@ function Discover() {
                                 />
 
                                 <div className="user-info">
-                                    <h4>{user.name}</h4>
+                                    <h4 style={{color:"black"}}>{user.name}</h4>
                                     <p>@{user.username}</p>
                                     <p className="user-bio">{user.bio}</p>
                                 </div>

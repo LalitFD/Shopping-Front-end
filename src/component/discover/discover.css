@@ -5,28 +5,24 @@
     height: 100vh;
 }
 
-
 /* Main content sidebar ke baad */
 .discover-main {
-    margin-left: 300px;
-    /* sidebar ka width */
-    padding: 40px;
-    /* width: calc(100% - 270px); */
-    /* background: rgb(181, 27, 27); */
+    margin-left: 20vw; /* 300px → ~20vw */
+    padding: 3vh 3vw; /* 40px → responsive */
 }
 
 /* Title and subtitle */
 .discover-title {
-    font-size: 28px;
+    font-size: 2vw; /* 28px → responsive */
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 1vh;
     color: white;
 }
 
 .discover-subtitle {
-    font-size: 16px;
+    font-size: 1.1vw; /* 16px → responsive */
     color: #555;
-    margin-bottom: 30px;
+    margin-bottom: 3vh;
 }
 
 /* Search box */
@@ -34,25 +30,24 @@
     display: flex;
     align-items: center;
     background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 10px 15px;
-    /* max-width: 700px; */
-    width: 600px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 0.07vw solid #e5e7eb;
+    border-radius: 1vw;
+    padding: 1.2vh 1.5vw;
+    width: 45vw; /* 600px → responsive */
+    box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.05);
 }
 
 .search-icon {
-    font-size: 18px;
+    font-size: 1.3vw;
     color: #6b7280;
-    margin-right: 10px;
+    margin-right: 1vw;
 }
 
 .search-input {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 1.1vw;
     background: transparent;
 }
 
@@ -60,50 +55,51 @@
     background-color: #4ade80;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 14px;
+    border-radius: 0.6vw;
+    padding: 0.9vh 1.3vw;
+    font-size: 0.95vw;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
-
-
 .search-results {
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .user-card {
     display: flex;
     align-items: center;
     background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
+    border: 0.07vw solid #ddd;
+    padding: 1vh 1vw;
+    margin-bottom: 1.5vh;
+    border-radius: 0.6vw;
+    width: 44.9vw;
+    height: 14vh;
 }
 
 .user-avatar {
-    width: 50px;
-    height: 50px;
+    width: 10%;
+    height: 80%;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 15px;
+    margin-right: 1.5vw;
 }
 
 .user-info h4 {
     margin: 0;
-    /* font-size: 16px; */
     color: black;
+    font-size: 1.5vw;
+    font-weight: bolder;
 }
 
 .user-info p {
-    margin: 2px 0;
-    font-size: 14px;
+    margin: 0.3vh 0;
+    font-size: 0.9vw;
     color: #666;
 }
 
 .user-bio {
     font-style: italic;
-    font-size: 13px;
+    font-size: 0.85vw;
 }

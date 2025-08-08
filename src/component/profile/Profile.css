@@ -12,8 +12,8 @@ body {
 }
 
 .container {
-    display: flex;
-    min-height: 100vh;
+    /* display: flex; */
+    width: 100%;
 }
 
 .sidebar {
@@ -70,7 +70,7 @@ body {
 .main-content {
     display: flex;
     flex-direction: column;
-    margin-left: 280px;
+    /* margin-left: 280px; */
     flex: 1;
     padding: 20px;
     max-height: 100vh;
@@ -93,7 +93,7 @@ body {
     background: #1a1a1a;
     border: 1px solid #333;
     border-radius: 12px;
-    padding: 30px;
+    padding: 20px;
     margin-bottom: 20px;
     /* Removed fixed height - let content determine height */
     min-height: 200px;
@@ -240,6 +240,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .post img {
