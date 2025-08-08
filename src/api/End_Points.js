@@ -16,7 +16,11 @@ export default {
     SINGLE_POST: BASE_URL + "/api/getPost",
     PROFILE_IMAGE: BASE_URL + "/public/profile",
     PROFILE_UPDATE: BASE_URL + "/profile",
-    FOLLOW: BASE_URL + "/follow/"
+
+
+    FOLLOW: BASE_URL + "/follow/",
+
+    UNIQUE_STORY: BASE_URL + "/story/stories/:id"
 
 
 }

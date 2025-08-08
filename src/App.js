@@ -17,7 +17,8 @@ import EditProfile from './component/editProfile/EditProfile.js';
 import Notification from './component/notification/Notification.js';
 import Music from './music/Music.js';
 import ProfileUpdate from './component/profileUpdate/ProfileUpdate.js';
-// import Reel from './component/reel/Reel.js';
+import StoryList from './component/Stories/Story.js';
+import Story from './component/Stories/Story.js';
 
 
 function App() {
@@ -37,6 +38,12 @@ function App() {
       <Route path='/Notification' element={<Notification />} />
       <Route path='/Music' element={<Auth><Music /></Auth>} />
       <Route path='/profileUpdate' element={<ProfileUpdate />} />
+      <Route path='/Stories' element={< StoryList />} />
+
+
+      <Route path="/story/:id" caseSensitive={false} element={<Story />} />
+
+
       {/* <Route path='/reel' element={<Reel />} /> */}
     </Routes>
 

@@ -60,9 +60,6 @@ function Main() {
     };
 
 
-
-
-
     return <>
         <Sidebar />
         <div className="dashboard-container" style={{ marginLeft: "300px" }}>
@@ -83,15 +80,22 @@ function Main() {
                             </div>
                         </div>
 
-                        {stories.map((story, index) => (
-                            <div key={index} className="dashboard-story-item"
-                            >
 
+
+
+                        {/* --------------------------------------------------------------------------------------------------------------------------- */}
+
+                        {stories.map((story, index) => (
+                            <div
+                                key={story._id} 
+                                className="dashboard-story-item"
+                                onClick={() => nevigate(`/story/${story._id}`)}
+                            >
                                 <div className="dashboard-avatar-circle">
                                     <img
                                         src={story.author.profilePic || img}
-
                                         className="dashboard-story-img"
+                                        alt={story.author.name}
                                     />
                                 </div>
                                 <div className="dashboard-username-label">
@@ -99,6 +103,11 @@ function Main() {
                                 </div>
                             </div>
                         ))}
+
+                        {/* --------------------------------------------------------------------------------------------------------------------------- */}
+
+
+
                     </div>
 
                     <div className="dashboard-posts">
