@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import userProfile from "../profile/m.jpg"
+import End_Points, { BASE_URL } from "../../api/End_Points";
 
 function Story() {
     const { id } = useParams();
@@ -16,7 +17,7 @@ function Story() {
         const fetchStory = async () => {
             console.log("Fetching story for ID:", id);
             try {
-                const res = await fetch(`http://localhost:3000/story/stories/${id}`);
+                const res = await fetch(`${End_Points.SINGLE_STORY}${id}`);
                 const data = await res.json();
                 console.log("Story data:", data);
                 setStory(data);
@@ -72,9 +73,8 @@ function Story() {
     if (loading) return <div style={{ color: 'white' }}>Loading...</div>;
     if (!story) return <div style={{ color: 'white' }}>Story not found</div>;
 
-    const imageUrl = story?.media?.url
-        ? `http://localhost:3000${story.media.url}`
-        : "";
+    const imageUrl = `${BASE_URL}${story.media.url}`;
+
 
     // const profileUrl = story?.author?.profile?.imageName
     //     ? `http://localhost:3000/${story.author.profile.imageName}`

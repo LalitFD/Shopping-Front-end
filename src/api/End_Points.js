@@ -1,7 +1,6 @@
-// export const BASE_URL = "https://shopping-beck-end.onrender.com";
-export const BASE_URL = "http://localhost:3000"
+export const BASE_URL = "https://shopping-beck-end.onrender.com";
+// export const BASE_URL = "http://localhost:3000"
 // https://shopping-beck-end.onrender.com
-
 export default {
     SIGN_UP: BASE_URL + "/register",
     LOG_IN: BASE_URL + "/login",
@@ -20,7 +19,8 @@ export default {
 
     FOLLOW: BASE_URL + "/follow/",
 
-    UNIQUE_STORY: BASE_URL + "/story/stories/:id"
+    UNIQUE_STORY: BASE_URL + "/story/stories/:id",
+    SINGLE_STORY: BASE_URL + "/story/stories/"
 
 
 }

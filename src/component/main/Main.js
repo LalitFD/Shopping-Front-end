@@ -125,7 +125,6 @@ function Main() {
                                             </div>
                                         </div>
 
-                                        {/* 3-dot menu - sirf apne post ke liye dikhana */}
                                         {post.author && post.author._id === userData._id && (
                                             <div style={{ position: "relative" }}>
                                                 <button

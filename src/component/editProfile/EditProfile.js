@@ -19,6 +19,7 @@ function EditProfile() {
         try {
             const res = await axios.put(
                 End_Points.EDIT_PROFILE,
+                
                 { name, username, bio },
                 { withCredentials: true }
             );
