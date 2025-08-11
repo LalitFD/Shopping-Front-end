@@ -93,7 +93,7 @@ function Music() {
     return (
         <div className="musicContainer">
             <nav className="musicNavbar">
-                <a className="musicNavbarBrand" href="#">Chill Bro..</a>
+                <a className="musicNavbarBrand" href="#">Music 🎧</a>
                 <div className="musicSearchForm">
                     <input
                         className="musicSearchInput"

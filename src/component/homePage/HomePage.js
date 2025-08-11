@@ -2,6 +2,7 @@ import React from "react";
 import "./HomePage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { isUserExist } from "../auth/Auth";
+import image from "../createStory/m.jpg"
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -17,17 +18,17 @@ const HomePage = () => {
     const handleDash = () => {
         navigate("/main")
     }
-    
+
     const handleLogOut = (event) => {
         sessionStorage.setItem("Social-User", "");
         sessionStorage.clear();
         navigate("/");
     }
-    
+
     return (
         <div className="homepage">
             <nav className="navbar">
-                <h2 className="logo" style={{position:"relative" ,top:"35px"}}>Social<span>.</span></h2>
+                <h2 className="logo" style={{ position: "relative", top: "35px" }}>Social<span>.</span></h2>
 
                 <ul className="nav-links">
                     <li>Home</li>
@@ -35,7 +36,7 @@ const HomePage = () => {
                     <li>About Us</li>
                     <li>Contact</li>
                 </ul>
-                
+
                 {!isUserExist() && <label className="login-btn" onClick={handleLogin}>Login</label>}
                 {isUserExist() && <label className="login-btn" onClick={handleLogOut}>Log-out</label>}
             </nav>
@@ -56,10 +57,11 @@ const HomePage = () => {
                         </button>
                     </div>
                     <div className="profile-icons">
-                        <i className="bi bi-person-circle user-icon"></i>
-                        <i className="bi bi-person-circle user-icon"></i>
-                        <i className="bi bi-person-circle user-icon"></i>
-                        <i className="bi bi-person-circle user-icon"></i>
+                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
+                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
+                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
+                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
+
                     </div>
                 </div>
 

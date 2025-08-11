@@ -42,11 +42,12 @@ function Discover() {
 
             const res = await axios.post(
                 `${End_Points.FOLLOW}${userId}`,
-
-
                 {},
-                { withCredentials: true }
+                {
+                    withCredentials: true
+                }
             );
+
 
             toast.success(res.data.message || "Followed successfully!");
 
@@ -65,7 +66,7 @@ function Discover() {
 
     return (
         <div className="discover-page">
-            <div className="container" style={{marginLeft:"-17vw",marginRight:"-9vw"}}>
+            <div className="container" style={{ marginLeft: "-17vw", marginRight: "-9vw" }}>
                 <Sidebar />
             </div>
 
@@ -101,7 +102,7 @@ function Discover() {
                                 />
 
                                 <div className="user-info">
-                                    <h4 style={{color:"black"}}>{user.name}</h4>
+                                    <h4 style={{ color: "black" }}>{user.name}</h4>
                                     <p>@{user.username}</p>
                                     <p className="user-bio">{user.bio}</p>
                                 </div>

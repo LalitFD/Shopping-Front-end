@@ -11,11 +11,13 @@
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.539.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.7.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
+    "socket.io-client": "^4.8.1",
     "toast": "^0.5.4",
     "web-vitals": "^2.1.4"
   },

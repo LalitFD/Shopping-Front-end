@@ -1,6 +1,8 @@
 .connections-page {
   display: flex;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
+  background: #121212; /* dark background */
 }
 
 /* Sidebar */
@@ -12,20 +14,17 @@
 .connections-main {
   flex: 1;
   padding: 30px;
-  position: relative;
-  top: -150px;
-  left: -100px;
+  color: white;
 }
 
 .connections-title {
   font-size: 28px;
   font-weight: bold;
-  color: white;
 }
 
 .connections-subtitle {
   font-size: 16px;
-  color: #777;
+  color: #bbb;
   margin-bottom: 20px;
 }
 
@@ -38,46 +37,94 @@
 
 .stat-card {
   flex: 1;
-  background: #f8f9fa;
+  background: #1e1e1e;
   border-radius: 10px;
   text-align: center;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
 }
 
 .stat-number1 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   display: block;
-  color: #000;
+  color: #00ffb3;
 }
 
 .stat-label {
   font-size: 14px;
-  color: #555;
+  color: #ccc;
 }
 
 /* Tabs */
 .connections-tabs {
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 .tab {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 8px;
-  background: white;
+  background: #1e1e1e;
+  color: white;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .tab:hover {
-  background: #f0f0f0;
+  background: #2b2b2b;
 }
 
 .tab.active {
-  background: #000;
-  color: #fff;
+  background: #00ffb3;
+  color: #000;
+}
+
+/* User Cards */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.user-card:hover {
+  background: #2b2b2b;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* Text styles */
+.loading-text, .empty-text {
+  color: #bbb;
+  text-align: center;
+  margin-top: 20px;
 }

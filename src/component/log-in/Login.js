@@ -26,16 +26,19 @@ function Login() {
 
             const response = await axios.post(End_Points.LOG_IN, state, { withCredentials: true });
 
+            const { user, token, message } = response.data;
+
+            if (!user.isVerified) {
+                toast.error("Please verify your email before logging in.");
+                return;
+            }
+
             sessionStorage.setItem(
                 "Social-User",
-                JSON.stringify({
-                    ...response.data.user,
-                    token: response.data.token
-                })
+                JSON.stringify({ ...user, token })
             );
 
-            toast.success(response.data.message);
-
+            toast.success(message);
             navigate("/");
 
         } catch (err) {
@@ -43,6 +46,7 @@ function Login() {
             toast.error(err.response?.data?.message || "Login failed. Please try again.");
         }
     };
+
 
     return (
         <>
