@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import imge from "./c.jpeg";
-import mahakal from "./m.jpg";
+import img from "./c.jpeg";
 import "./Main.css";
 import Sidebar from "../Sidebar/Sidebar";
 import End_Points from "../../api/End_Points";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Story from "../Stories/Story";
 function Main() {
 
     const userData = JSON.parse(sessionStorage.getItem("Social-User"));
@@ -87,17 +85,16 @@ function Main() {
 
                         {stories?.map((story, index) => (
                             <div
-                                key={story?._id} 
+                                key={story?._id}
                                 className="dashboard-story-item"
                                 onClick={() => nevigate(`/story/${story?._id}`)}
                             >
                                 <div className="dashboard-avatar-circle">
-                                    {/* <img
-                                        // src={story?.author?.profilePic || img}
-                                        src={imge}
+                                    <img
+                                        src={img}
                                         className="dashboard-story-img"
                                         alt={story.author.name}
-                                    /> */}
+                                    />
                                 </div>
                                 <div className="dashboard-username-label">
                                     {story?.author?.name}
