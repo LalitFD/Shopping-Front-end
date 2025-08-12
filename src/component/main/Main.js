@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import img from "./c.jpeg";
+import imge from "./c.jpeg";
 import mahakal from "./m.jpg";
 import "./Main.css";
 import Sidebar from "../Sidebar/Sidebar";
@@ -85,21 +85,22 @@ function Main() {
 
                         {/* --------------------------------------------------------------------------------------------------------------------------- */}
 
-                        {stories.map((story, index) => (
+                        {stories?.map((story, index) => (
                             <div
-                                key={story._id} 
+                                key={story?._id} 
                                 className="dashboard-story-item"
-                                onClick={() => nevigate(`/story/${story._id}`)}
+                                onClick={() => nevigate(`/story/${story?._id}`)}
                             >
                                 <div className="dashboard-avatar-circle">
-                                    <img
-                                        src={story.author.profilePic || img}
+                                    {/* <img
+                                        // src={story?.author?.profilePic || img}
+                                        src={imge}
                                         className="dashboard-story-img"
                                         alt={story.author.name}
-                                    />
+                                    /> */}
                                 </div>
                                 <div className="dashboard-username-label">
-                                    {story.author.name}
+                                    {story?.author?.name}
                                 </div>
                             </div>
                         ))}
