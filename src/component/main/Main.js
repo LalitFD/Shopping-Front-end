@@ -20,6 +20,28 @@ function Main() {
 
     console.log("all posts", posts);
 
+    const groupStoriesByAuthor = (stories) => {
+        const grouped = {};
+
+        stories.forEach(story => {
+            const authorId = story.author._id;
+            if (!grouped[authorId]) {
+                grouped[authorId] = {
+                    author: story.author,
+                    stories: []
+                };
+            }
+            grouped[authorId].stories.push(story);
+        });
+
+        return Object.values(grouped);
+    };
+
+    // Stories ko group karo
+    const groupedStories = groupStoriesByAuthor(stories);
+
+
+
     useEffect(() => {
         const fetchStories = async () => {
             try {
@@ -146,30 +168,84 @@ function Main() {
                 <div className="dashboard-feed">
 
                     <div className="dashboard-story-list">
+                        {/* Create story button */}
                         <div className="dashboard-story-item" onClick={() => nevigate("/createStory")}>
-                            <div style={{ display: "flex", overflowX: "auto", padding: "10px", border: "1px solid white", borderRadius: "50%", height: "70px", width: "70px" }}>
-                                <i className="bi bi-plus" style={{ position: "relative", left: "15px", top: "11px", height: "40px" }}></i>
+                            <div style={{
+                                display: "flex",
+                                overflowX: "auto",
+                                padding: "10px",
+                                border: "1px solid white",
+                                borderRadius: "50%",
+                                height: "70px",
+                                width: "70px"
+                            }}>
+                                <i className="bi bi-plus" style={{
+                                    position: "relative",
+                                    left: "15px",
+                                    top: "11px",
+                                    height: "40px"
+                                }}></i>
                             </div>
-                            <div className="dashboard-username-label" style={{ position: "relative", top: "7.5px" }}>
+                            <div className="dashboard-username-label" style={{
+                                position: "relative",
+                                top: "7.5px"
+                            }}>
                                 Create
                             </div>
                         </div>
 
-                        {stories.map((story, index) => (
+                        {/* Grouped stories render */}
+                        {groupedStories.map((userStories, index) => (
                             <div
-                                key={story._id}
+                                key={userStories.author._id}
                                 className="dashboard-story-item"
-                                onClick={() => nevigate(`/story/${story._id}`)}
+                                onClick={() => {
+                                    // User ID pass karo instead of story ID
+                                    nevigate(`/user-stories/${userStories.author._id}`);
+                                }}
                             >
-                                <div className="dashboard-avatar-circle">
+                                <div className="dashboard-avatar-circle" style={{ position: 'relative' }}>
                                     <img
-                                        src={story?.author?.profilePic || img}
+                                        src={userStories.author.profilePic || img}
                                         className="dashboard-story-img"
-                                        alt={story.author.name}
+                                        alt={userStories.author.name}
                                     />
+                                    {/* Multiple stories indicator */}
+                                    {/* {userStories.stories.length > 1 && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '-5px',
+                                            right: '-5px',
+                                            backgroundColor: '#ff4458',
+                                            color: 'white',
+                                            borderRadius: '50%',
+                                            width: '24px',
+                                            height: '24px',
+                                            fontSize: '12px',
+                                            fontWeight: 'bold',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            border: '2px solid white'
+                                        }}>
+                                            {userStories.stories.length}
+                                        </div>
+                                    )} */}
+
+                                    {/* Ring effect for unseen stories */}
+                                    {/* <div style={{
+                                        position: 'absolute',
+                                        top: '-3px',
+                                        left: '-3px',
+                                        right: '-3px',
+                                        bottom: '-3px',
+                                        border: '3px solid #ff4458',
+                                        borderRadius: '50%',
+                                        opacity: 0.8
+                                    }}></div> */}
                                 </div>
                                 <div className="dashboard-username-label">
-                                    {story.author.name}
+                                    {userStories.author.name}
                                 </div>
                             </div>
                         ))}

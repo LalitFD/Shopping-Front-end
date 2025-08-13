@@ -43,7 +43,7 @@ function App() {
       <Route path='/Stories' element={< StoryList />} />
 
 
-      <Route path="/story/:id" caseSensitive={false} element={<Story />} />
+      <Route path="/user-stories/:userId" caseSensitive={false} element={<Story />} />
 
 
       <Route path='/reel' element={<Reel />} />
