@@ -1,74 +1,66 @@
-.connections-page {
+.notif-page {
   display: flex;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background: #121212; /* dark background */
+  background: #121212;
 }
 
-/* Sidebar */
-.sidebar-container {
-  width: 250px;
-}
-
-/* Main Content */
-.connections-main {
+.notif-main {
   flex: 1;
   padding: 30px;
   color: white;
 }
 
-.connections-title {
+.notif-title {
   font-size: 28px;
   font-weight: bold;
 }
 
-.connections-subtitle {
+.notif-subtitle {
   font-size: 16px;
   color: #bbb;
   margin-bottom: 20px;
 }
 
-/* Stats Cards */
-.connections-stats {
+.notif-stats {
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
 }
 
-.stat-card {
+.notif-stat-card {
   flex: 1;
   background: #1e1e1e;
   border-radius: 10px;
   text-align: center;
   padding: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
 }
 
-.stat-card:hover {
+.notif-stat-card:hover {
   transform: translateY(-3px);
 }
 
-.stat-number1 {
+.notif-stat-number {
   font-size: 24px;
   font-weight: bold;
   display: block;
   color: #00ffb3;
 }
 
-.stat-label {
+.notif-stat-label {
   font-size: 14px;
   color: #ccc;
 }
 
-/* Tabs */
-.connections-tabs {
+.notif-tabs {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.tab {
+.notif-tab {
   flex: 1;
   padding: 10px;
   border: none;
@@ -79,17 +71,20 @@
   transition: 0.3s;
 }
 
-.tab:hover {
+.notif-tab:hover {
   background: #2b2b2b;
 }
 
-.tab.active {
+.notif-tab-active {
   background: #00ffb3;
   color: #000;
 }
 
-/* User Cards */
-.user-card {
+.notif-list {
+  /* Container for user cards */
+}
+
+.notif-user-card {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -100,30 +95,35 @@
   transition: 0.2s;
 }
 
-.user-card:hover {
+.notif-user-card:hover {
   background: #2b2b2b;
 }
 
-.user-avatar {
+.notif-user-avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.user-info h4 {
-  margin: 0;
-  font-size: 16px;
+.notif-user-info {
+  /* Container for user details */
 }
 
-.user-info p {
+.notif-user-name {
+  margin: 0;
+  font-size: 16px;
+  color: white;
+}
+
+.notif-user-username {
   margin: 0;
   font-size: 13px;
   color: #aaa;
 }
 
-/* Text styles */
-.loading-text, .empty-text {
+.notif-loading,
+.notif-empty {
   color: #bbb;
   text-align: center;
   margin-top: 20px;

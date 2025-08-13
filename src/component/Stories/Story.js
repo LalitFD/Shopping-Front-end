@@ -20,6 +20,7 @@ function Story() {
                 const res = await fetch(`${End_Points.SINGLE_STORY}${id}`);
                 const data = await res.json();
                 console.log("Story data:", data);
+                console.log("Media URL:", data?.media?.url); // Debug log
                 setStory(data);
 
                 const duration = data?.media?.duration || 15;
@@ -58,11 +59,12 @@ function Story() {
 
     const handleImageError = (e) => {
         console.error("Image failed to load:", e.target.src);
+        console.log("Story media URL:", story?.media?.url);
         setImageError(true);
     };
 
     const handleImageLoad = () => {
-        console.log("Image loaded successfully");
+        console.log("Image loaded successfully:", story?.media?.url);
         setImageError(false);
     };
 
@@ -73,14 +75,15 @@ function Story() {
     if (loading) return <div style={{ color: 'white' }}>Loading...</div>;
     if (!story) return <div style={{ color: 'white' }}>Story not found</div>;
 
-    const imageUrl = `${BASE_URL}${story.media.url}`;
+    const imageUrl = story.media?.url;
 
+    console.log("Final Image URL:", imageUrl);
 
-    // const profileUrl = story?.author?.profile?.imageName
-    //     ? `http://localhost:3000/${story.author.profile.imageName}`
-    //     : `https://ui-avatars.com/api/?name=${story?.author?.name || story?.author?.username}&background=007bff&color=fff`;
+    const isCloudinaryUrl = imageUrl?.startsWith('https://res.cloudinary.com/');
+    const finalImageUrl = isCloudinaryUrl ? imageUrl : `${BASE_URL}${imageUrl}`;
 
-    // console.log("Image URL:", imageUrl);
+    console.log("Is Cloudinary URL:", isCloudinaryUrl);
+    console.log("Final processed URL:", finalImageUrl);
 
     return (
         <div style={{
@@ -96,6 +99,7 @@ function Story() {
             justifyContent: 'center',
             zIndex: 1000
         }}>
+            {/* Progress Bar */}
             <div style={{
                 position: 'absolute',
                 top: '10px',
@@ -114,6 +118,7 @@ function Story() {
                 }}></div>
             </div>
 
+            {/* Close Button */}
             <button
                 onClick={handleClose}
                 style={{
@@ -136,6 +141,7 @@ function Story() {
                 ×
             </button>
 
+            {/* User Info */}
             <div style={{
                 position: 'absolute',
                 top: '30px',
@@ -147,7 +153,7 @@ function Story() {
             }}>
                 <img
                     src={userProfile}
-                    alt={story.author?.username}
+                    alt={story.author?.username || "User"}
                     style={{
                         width: '40px',
                         height: '40px',
@@ -163,7 +169,7 @@ function Story() {
                         fontWeight: 'bold',
                         marginBottom: '2px'
                     }}>
-                        {story.author?.username}
+                        {story.author?.username || story.author?.name || "Unknown User"}
                     </div>
                     <div style={{
                         fontSize: '12px',
@@ -174,23 +180,64 @@ function Story() {
                 </div>
             </div>
 
-
+            {/* Story Media */}
             <div onClick={handleClose} style={{ cursor: 'pointer' }}>
-                <img
-                    src={imageUrl}
-                    alt="Story"
-                    onError={handleImageError}
-                    onLoad={handleImageLoad}
-                    style={{
-                        maxWidth: '80vw',
-                        maxHeight: '70vh',
-                        objectFit: 'contain',
-                        borderRadius: '10px'
-                    }}
-                />
+                {story.media?.type === 'video' ? (
+                    <video
+                        src={finalImageUrl}
+                        autoPlay
+                        muted
+                        style={{
+                            maxWidth: '80vw',
+                            maxHeight: '70vh',
+                            objectFit: 'contain',
+                            borderRadius: '10px'
+                        }}
+                        onError={(e) => {
+                            console.error("Video failed to load:", e.target.src);
+                            setImageError(true);
+                        }}
+                    />
+                ) : (
+                    <>
+                        {!imageError ? (
+                            <img
+                                src={finalImageUrl}
+                                alt="Story"
+                                onError={handleImageError}
+                                onLoad={handleImageLoad}
+                                style={{
+                                    maxWidth: '80vw',
+                                    maxHeight: '70vh',
+                                    objectFit: 'contain',
+                                    borderRadius: '10px'
+                                }}
+                            />
+                        ) : (
+                            <div style={{
+                                width: '300px',
+                                height: '400px',
+                                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                                textAlign: 'center'
+                            }}>
+                                <div>
+                                    <p>Failed to load story</p>
+                                    <p style={{ fontSize: '12px', opacity: 0.7 }}>
+                                        URL: {finalImageUrl}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
 
-
+            {/* Bottom Text */}
             <div style={{
                 position: 'absolute',
                 bottom: '30px',

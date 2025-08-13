@@ -15,9 +15,9 @@ function Sidebar() {
       <button className="toggle-btn" onClick={toggleSidebar}>
         ☰
       </button>
-      <div className={`sidebar ${isOpen ? "open" : ""}`} style={{height:"94vh"}}>
+      <div className={`sidebar ${isOpen ? "open" : ""}`} style={{ height: "94vh" }}>
 
-        <div className="logo" onClick={() => navigate("/Main")} style={{textAlign:"start"}}>
+        <div className="logo" onClick={() => navigate("/Main")} style={{ textAlign: "start" }}>
           Social
         </div>
 
@@ -59,6 +59,17 @@ function Sidebar() {
             <i className="bi bi-music-note-beamed"></i>
           </span>
           Music
+        </NavLink>
+
+
+        <NavLink
+          to="/Reel"
+          className={({ isActive }) => (isActive ? "sidebar-item active" : "sidebar-item")}
+        >
+          <span className="sidebar-item-icon">
+            <i class="bi bi-file-earmark-play"></i>
+          </span>
+          Reel
         </NavLink>
 
         <NavLink

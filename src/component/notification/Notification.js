@@ -1,93 +1,78 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
-import image from "./userProfile.jpeg"
+import image from "./userProfile.jpeg";
 import "./Notification.css";
 import { BASE_URL } from "../../api/End_Points";
 
 function Notification() {
-    const [activeTab, setActiveTab] = useState("followers");
-    const [followers, setFollowers] = useState([]);
-    const [following, setFollowing] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("followers");
+  const [data, setData] = useState({ followers: [], following: [] });
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchConnections = async () => {
-            try {
-                const res = await axios.get(BASE_URL + "/connection", {
-                    withCredentials: true
-                });
-                setFollowers(res.data.followers);
-                setFollowing(res.data.following);
-            } catch (err) {
-                console.error("Error fetching connections:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchConnections();
-    }, []);
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/connection`, { withCredentials: true })
+      .then((res) => setData(res.data))
+      .catch((err) => console.error("Error fetching connections:", err))
+      .finally(() => setLoading(false));
+  }, []);
 
-    const renderList = () => {
-        const data = activeTab === "followers" ? followers : following;
-        if (loading) return <p className="loading-text">Loading...</p>;
-        if (data.length === 0) return <p className="empty-text">No {activeTab} found</p>;
+  const tabs = ["followers", "following"];
+  const currentList = data[activeTab] || [];
 
-        return data.map(user => (
-            <div key={user._id} className="user-card">
-                <img
-                    src={image}
-                    // alt={user.name}
-                    className="user-avatar"
-                />
-                <div className="user-info">
-                    <h4 style={{ color: "white" }}>{user.name}</h4>
-                    <p>@{user.username}</p>
-                </div>
+  return (
+    <div className="notif-page">
+      <Sidebar />
+      <div className="notif-main">
+        <h2 className="notif-title">Connections</h2>
+        <p className="notif-subtitle">
+          Manage your network and discover new connections
+        </p>
+
+        <div className="notif-stats">
+          {tabs.map((type) => (
+            <div className="notif-stat-card" key={type}>
+              <span className="notif-stat-number">{data[type]?.length || 0}</span>
+              <span className="notif-stat-label">
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </span>
             </div>
-        ));
-    };
-
-    return (
-        <div className="connections-page">
-            <Sidebar />
-
-            <div className="connections-main">
-                <h2 className="connections-title">Connections</h2>
-                <p className="connections-subtitle">
-                    Manage your network and discover new connections
-                </p>
-
-                <div className="connections-stats">
-                    <div className="stat-card">
-                        <span className="stat-number1">{followers.length}</span>
-                        <span className="stat-label">Followers</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="stat-number1">{following.length}</span>
-                        <span className="stat-label">Following</span>
-                    </div>
-                </div>
-
-                <div className="connections-tabs">
-                    <button
-                        className={`tab ${activeTab === "followers" ? "active" : ""}`}
-                        onClick={() => setActiveTab("followers")}
-                    >
-                        Followers
-                    </button>
-                    <button
-                        className={`tab ${activeTab === "following" ? "active" : ""}`}
-                        onClick={() => setActiveTab("following")}
-                    >
-                        Following
-                    </button>
-                </div>
-
-                <div className="connections-list">{renderList()}</div>
-            </div>
+          ))}
         </div>
-    );
+
+        <div className="notif-tabs">
+          {tabs.map((type) => (
+            <button
+              key={type}
+              className={`notif-tab ${activeTab === type ? "notif-tab-active" : ""}`}
+              onClick={() => setActiveTab(type)}
+            >
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        <div className="notif-list">
+          {loading ? (
+            <p className="notif-loading">Loading...</p>
+          ) : currentList.length === 0 ? (
+            <p className="notif-empty">No {activeTab} found</p>
+          ) : (
+            currentList.map((user) => (
+              <div key={user._id} className="notif-user-card">
+                <img src={image} className="notif-user-avatar" alt="" />
+                <div className="notif-user-info">
+                  <h4 className="notif-user-name">{user.name}</h4>
+                  <p className="notif-user-username">@{user.username}</p>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Notification;

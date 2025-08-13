@@ -19,6 +19,8 @@ import Music from './music/Music.js';
 import ProfileUpdate from './component/profileUpdate/ProfileUpdate.js';
 import StoryList from './component/Stories/Story.js';
 import Story from './component/Stories/Story.js';
+import Reel from './component/reel/Reel.js';
+import CreateReel from './component/createReel/CreateReelPage.js';
 
 
 function App() {
@@ -44,7 +46,8 @@ function App() {
       <Route path="/story/:id" caseSensitive={false} element={<Story />} />
 
 
-      {/* <Route path='/reel' element={<Reel />} /> */}
+      <Route path='/reel' element={<Reel />} />
+      <Route path='/create-reel' element={<CreateReel />} />
     </Routes>
 
   );

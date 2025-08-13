@@ -1,4 +1,5 @@
 // import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Music.css';
 
 // function Music() {
@@ -69,6 +70,9 @@ function Music() {
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+
+    const nevigate= useNavigate();
+
     const getTracks = async () => {
         if (!searchQuery.trim()) return;
 
@@ -93,7 +97,7 @@ function Music() {
     return (
         <div className="musicContainer">
             <nav className="musicNavbar">
-                <a className="musicNavbarBrand" href="#">Music 🎧</a>
+                <a className="musicNavbarBrand" onClick={()=>nevigate("/Main")} style={{cursor:"pointer"}}>Music 🎧</a>
                 <div className="musicSearchForm">
                     <input
                         className="musicSearchInput"

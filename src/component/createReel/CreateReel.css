@@ -1,0 +1,86 @@
+.create-post-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  min-height: 100vh;
+  color: white;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.page-subtitle {
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.post-card {
+  position: relative;
+  left: -22%;
+  background-color: white;
+  color: black;
+  /* max-width: 500px; */
+  width: 40vw;
+  height: 40vh;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.user-email {
+  color: gray;
+  font-size: 14px;
+}
+
+.post-input {
+  width: 100%;
+  min-height: 60px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 15px;
+  resize: none;
+}
+
+.actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload-icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.post-btn {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.post-btn:hover {
+  background-color: #1ea94c;
+}
