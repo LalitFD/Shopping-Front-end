@@ -210,39 +210,6 @@ function Main() {
                                         className="dashboard-story-img"
                                         alt={userStories.author.name}
                                     />
-                                    {/* Multiple stories indicator */}
-                                    {/* {userStories.stories.length > 1 && (
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: '-5px',
-                                            right: '-5px',
-                                            backgroundColor: '#ff4458',
-                                            color: 'white',
-                                            borderRadius: '50%',
-                                            width: '24px',
-                                            height: '24px',
-                                            fontSize: '12px',
-                                            fontWeight: 'bold',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            border: '2px solid white'
-                                        }}>
-                                            {userStories.stories.length}
-                                        </div>
-                                    )} */}
-
-                                    {/* Ring effect for unseen stories */}
-                                    {/* <div style={{
-                                        position: 'absolute',
-                                        top: '-3px',
-                                        left: '-3px',
-                                        right: '-3px',
-                                        bottom: '-3px',
-                                        border: '3px solid #ff4458',
-                                        borderRadius: '50%',
-                                        opacity: 0.8
-                                    }}></div> */}
                                 </div>
                                 <div className="dashboard-username-label">
                                     {userStories.author.name}
