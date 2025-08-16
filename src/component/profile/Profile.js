@@ -48,13 +48,13 @@ function Profile() {
             });
 
             // Update the posts state to reflect the like change
-            setPosts(prevPosts => 
+            setPosts(prevPosts =>
                 prevPosts.map(post => {
                     if (post._id === postId) {
                         const isCurrentlyLiked = post.likes?.some(like => like.user === userData._id);
                         return {
                             ...post,
-                            likes: isCurrentlyLiked 
+                            likes: isCurrentlyLiked
                                 ? post.likes.filter(like => like.user !== userData._id)
                                 : [...(post.likes || []), { user: userData._id }]
                         };
@@ -74,6 +74,77 @@ function Profile() {
         return post.likes?.some(like => like.user === userData._id) || false;
     };
 
+    // Function to get first letter of name for default avatar
+    const getInitials = (name) => {
+        if (!name) return "U"; // Default to "U" for User if no name
+        return name.charAt(0).toUpperCase();
+    };
+
+    // Function to generate background color based on name
+    const getAvatarColor = (name) => {
+        if (!name) return "#6B7280"; // Default gray color
+
+        const colors = [
+            "#EF4444", "#F97316", "#F59E0B", "#EAB308",
+            "#84CC16", "#22C55E", "#10B981", "#14B8A6",
+            "#06B6D4", "#0EA5E9", "#3B82F6", "#6366F1",
+            "#8B5CF6", "#A855F7", "#D946EF", "#EC4899"
+        ];
+
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+            hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        return colors[Math.abs(hash) % colors.length];
+    };
+
+    // Profile Avatar Component
+    const ProfileAvatar = () => {
+        const hasProfileImage = userData?.profile?.imageName;
+
+        if (hasProfileImage) {
+            return (
+                <img
+                    onClick={() => navigate("/profileUpdate")}
+                    src={`${End_Points.PROFILE_IMAGE}/${userData.profile.imageName}`}
+                    alt="Profile"
+                    style={{
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        objectFit: "cover"
+                    }}
+                />
+            );
+        }
+
+        // Default avatar with first letter
+        return (
+            <div
+                onClick={() => navigate("/profileUpdate")}
+                style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    backgroundColor: getAvatarColor(userData?.name),
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                    color: "white",
+                    userSelect: "none",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+                }}
+            >
+                {getInitials(userData?.name)}
+            </div>
+        );
+    };
+
     return <>
         <Sidebar />
 
@@ -83,22 +154,7 @@ function Profile() {
 
                 <div className="profile-info">
                     <div className="profile-avatar" style={{ position: "relative", top: "20px" }}>
-                        <img
-                            onClick={() => navigate("/profileUpdate")}
-                            src={
-                                userData?.profile?.imageName
-                                    ? `${End_Points.PROFILE_IMAGE}/${userData.profile.imageName}`
-                                    : mahakal
-                            }
-                            alt="Profile"
-                            style={{
-                                width: "80px",
-                                height: "80px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                                objectFit: "cover"
-                            }}
-                        />
+                        <ProfileAvatar />
                     </div>
 
                     <div className="profile-details" style={{ width: "5%" }}>
@@ -144,8 +200,8 @@ function Profile() {
             <div className="Posts-header">
                 <div className="AllPost">
                     {posts.map((post, index) => (
-                        <div 
-                            className="post" 
+                        <div
+                            className="post"
                             key={post._id || index}
                             onMouseEnter={() => setHoveredPost(post._id)}
                             onMouseLeave={() => setHoveredPost(null)}
@@ -209,7 +265,7 @@ function Profile() {
                                         transition: 'all 0.3s ease'
                                     }}
                                 >
-                                    <div 
+                                    <div
                                         style={{
                                             display: 'flex',
                                             alignItems: 'center',
@@ -219,18 +275,18 @@ function Profile() {
                                         }}
                                     >
                                         {/* Like Icon and Count */}
-                                        <div 
-                                            style={{ 
-                                                display: 'flex', 
-                                                alignItems: 'center', 
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
                                                 gap: '8px',
                                                 cursor: 'pointer'
                                             }}
                                             onClick={(e) => handleLike(post._id, e)}
                                         >
-                                            <i 
+                                            <i
                                                 className={`bi ${isLikedByCurrentUser(post) ? 'bi-heart-fill' : 'bi-heart'}`}
-                                                style={{ 
+                                                style={{
                                                     fontSize: '24px',
                                                     color: isLikedByCurrentUser(post) ? '#ff3040' : 'white'
                                                 }}
@@ -241,15 +297,15 @@ function Profile() {
                                         </div>
 
                                         {/* Comments Icon (optional) */}
-                                        <div 
-                                            style={{ 
-                                                display: 'flex', 
-                                                alignItems: 'center', 
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
                                                 gap: '8px',
                                                 cursor: 'pointer'
                                             }}
                                         >
-                                            <i 
+                                            <i
                                                 className="bi bi-chat"
                                                 style={{ fontSize: '24px' }}
                                             ></i>

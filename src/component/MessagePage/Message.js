@@ -47,8 +47,7 @@ function Message() {
         }
     }, []);
 
-
-    // ✅ Fetch all users from backend
+    // ✅ Fetch only VERIFIED users from backend
     useEffect(() => {
         const fetchUsers = async () => {
             if (!currentUser?._id) return;
@@ -62,8 +61,53 @@ function Message() {
 
                 const userList = Array.isArray(res.data) ? res.data : res.data.users || res.data.data || [];
 
-                const otherUsers = userList.filter(user => user._id !== currentUser._id);
-                setUsers(otherUsers);
+                // 🔍 DEBUG: Print ALL users and their verification status
+                console.log("=== ALL USERS FROM BACKEND ===");
+                console.log("Total users:", userList.length);
+                console.log("Current user ID:", currentUser._id);
+                
+                userList.forEach((user, index) => {
+                    console.log(`\n--- User ${index + 1} ---`);
+                    console.log("ID:", user._id);
+                    console.log("Name:", user.name);
+                    console.log("Username:", user.username);
+                    console.log("Email:", user.email);
+                    console.log("isVerified:", user.isVerified);
+                    console.log("isVerified Type:", typeof user.isVerified);
+                    console.log("Is Current User:", user._id === currentUser._id);
+                });
+
+                // 🔍 Print ONLY VERIFIED users (isVerified === true)
+                console.log("\n=== VERIFIED USERS ONLY ===");
+                const trueVerifiedUsers = userList.filter(user => user.isVerified === true);
+                console.log("True verified users count:", trueVerifiedUsers.length);
+                
+                trueVerifiedUsers.forEach((user, index) => {
+                    console.log(`✅ Verified User ${index + 1}:`, {
+                        id: user._id,
+                        name: user.name,
+                        username: user.username,
+                        email: user.email,
+                        isVerified: user.isVerified
+                    });
+                });
+
+                // ✅ Filter: Only verified users + exclude current user
+                const verifiedUsers = userList.filter(user => {
+                    const isNotCurrentUser = user._id !== currentUser._id;
+                    const isVerified = user.isVerified === true;
+                    
+                    if (isVerified && isNotCurrentUser) {
+                        console.log(`🎯 Final filtered user: ${user.username || user.name}`);
+                    }
+                    
+                    return isNotCurrentUser && isVerified;
+                });
+
+                console.log("\n=== FINAL RESULT ===");
+                console.log("Users to show in chat:", verifiedUsers.length);
+                console.log("Final users list:", verifiedUsers);
+                setUsers(verifiedUsers);
                 setLoading(false);
             } catch (err) {
                 console.error("Error fetching users:", err);
@@ -200,7 +244,7 @@ function Message() {
                 <div>
                     Loading chat...
                     <div style={{ fontSize: "14px", marginTop: "10px" }}>
-                        Checking session storage...
+                        Finding verified users...
                     </div>
                 </div>
             </div>
@@ -243,6 +287,32 @@ function Message() {
         );
     }
 
+    // ✅ Check if current user is verified
+    if (currentUser && !currentUser.isVerified) {
+        return (
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "90vh",
+                fontSize: "18px",
+                color: "#666",
+                textAlign: "center"
+            }}>
+                <div style={{ fontSize: "48px", marginBottom: "20px" }}>⚠️</div>
+                <div>Account Not Verified</div>
+                <div style={{ fontSize: "14px", marginTop: "10px", color: "#999", maxWidth: "400px" }}>
+                    Please verify your email account to access chat features. 
+                    Only verified users can send and receive messages.
+                </div>
+                <div style={{ fontSize: "12px", marginTop: "10px", color: "#999" }}>
+                    Check your email for verification link
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div style={{
             display: "flex",
@@ -265,23 +335,37 @@ function Message() {
                     borderBottom: "1px solid #ddd",
                     // backgroundColor: "#fff"
                 }}>
-                    <h4 style={{ margin: 0, color: "white" }}>Chats</h4>
+                    <h4 style={{ margin: 0, color: "white" }}>
+                        Chats 
+                        <span style={{ 
+                            fontSize: "12px", 
+                            backgroundColor: "#4CAF50", 
+                            color: "white", 
+                            padding: "2px 6px", 
+                            borderRadius: "10px", 
+                            marginLeft: "8px" 
+                        }}>
+                            ✓ Verified Only
+                        </span>
+                    </h4>
                     <small style={{ color: "white" }}>
                         Welcome, {currentUser.username}
                     </small>
                     <br />
-
                     <small style={{ color: "white" }}>
-                        {users.length} user{users.length !== 1 ? 's' : ''} available
+                        {users.length} verified user{users.length !== 1 ? 's' : ''} available
                     </small>
-
                 </div>
 
                 <div style={{ flex: 1, overflowY: "auto" }}>
                     {users.length === 0 ? (
-                        <p style={{ padding: "20px", textAlign: "center", color: "#666" }}>
-                            No other users found
-                        </p>
+                        <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
+                            <div style={{ fontSize: "32px", marginBottom: "10px" }}>🔍</div>
+                            <p>No verified users found</p>
+                            <small style={{ color: "#999" }}>
+                                Only verified users can chat
+                            </small>
+                        </div>
                     ) : (
                         users.map((user) => (
                             <div
@@ -309,8 +393,21 @@ function Message() {
                                 }}
                             >
                                 <div>
-                                    <div style={{ fontWeight: "500", color: "#10dc62ff" }}>
+                                    <div style={{ 
+                                        fontWeight: "500", 
+                                        color: "#10dc62ff",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "5px"
+                                    }}>
                                         {user.username || user.email || user.name}
+                                        {/* Verified Badge */}
+                                        <span style={{
+                                            fontSize: "12px",
+                                            color: "#4CAF50"
+                                        }}>
+                                            ✓
+                                        </span>
                                     </div>
                                     <div style={{ fontSize: "12px", color: "#666" }}>
                                         {onlineUsers.includes(user._id) ? "Online" : "Offline"}
@@ -344,11 +441,12 @@ function Message() {
                         gap: "10px"
                     }}>
                         <div>
-                            <h5 style={{ margin: 0, color: "#333" }}>
+                            <h5 style={{ margin: 0, color: "#333", display: "flex", alignItems: "center", gap: "8px" }}>
                                 {selectedUserInfo.username || selectedUserInfo.email || selectedUserInfo.name}
+                                <span style={{ fontSize: "14px", color: "#4CAF50" }}>✓</span>
                             </h5>
                             <small style={{ color: "#666" }}>
-                                {onlineUsers.includes(selectedUser) ? "Online" : "Offline"}
+                                {onlineUsers.includes(selectedUser) ? "Online" : "Offline"} • Verified
                             </small>
                         </div>
                         {onlineUsers.includes(selectedUser) && (
@@ -436,7 +534,10 @@ function Message() {
                             fontSize: "16px"
                         }}>
                             <div style={{ fontSize: "48px", marginBottom: "10px" }}>💬</div>
-                            <div>Select a user to start chatting</div>
+                            <div>Select a verified user to start chatting</div>
+                            <div style={{ fontSize: "14px", marginTop: "5px", color: "#4CAF50" }}>
+                                🔒 Secure chat with verified users only
+                            </div>
                         </div>
                     )}
                 </div>
