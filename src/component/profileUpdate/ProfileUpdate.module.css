@@ -1,5 +1,6 @@
 .pu-container {
-    max-width: 400px;
+    width: 40vw;
+    height: 60vh;
     margin: 50px auto;
     background: #1f2937;
     padding: 20px;

@@ -37,9 +37,10 @@ function Login() {
                 "Social-User",
                 JSON.stringify({ ...user, token })
             );
-
             toast.success(message);
-            navigate("/");
+            navigate("/Main");
+
+
 
         } catch (err) {
             console.error(err);

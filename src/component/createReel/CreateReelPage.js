@@ -3,10 +3,14 @@ import axios from "axios";
 import myImage from "./m.jpg"
 import "./CreateReel.css"
 import { BASE_URL } from "../../api/End_Points";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function CreateReel() {
     const [description, setDescription] = useState("");
     const [video, setVideo] = useState(null);
+
+    const nevigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,22 +20,38 @@ function CreateReel() {
             return;
         }
 
+        if (!description.trim()) {
+            alert("Please enter a description");
+            return;
+        }
+
         try {
             const formData = new FormData();
             formData.append("description", description);
-            formData.append("videoUrl", video);
+            formData.append("video", video);
 
-            const response = await axios.post(`${BASE_URL}/reels`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+            const response = await axios.post(`${BASE_URL}/reel/reels`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
                 withCredentials: true,
             });
 
-            alert("Reel uploaded successfully!");
-            setDescription("");
-            setVideo(null);
+            if (response.data.success) {
+                toast.success("Reel uploaded successfully!");
+                nevigate("/reel")
+                setDescription("");
+                setVideo(null);
+                document.getElementById('video-upload').value = '';
+            }
         } catch (error) {
             console.error("Error uploading reel:", error);
-            alert("Failed to upload reel");
+
+            if (error.response?.data?.error) {
+                toast.error(error.response.data.error);
+            } else {
+                toast.error("Failed to upload reel");
+            }
         }
     };
 
@@ -46,7 +66,6 @@ function CreateReel() {
                         src={myImage}
                         alt="User"
                         className="user-avatar"
-                    // style={{ borderRadius: "50%" }}
                     />
                     <div>
                         <h4 className="user-name">Lalit Doriya</h4>
@@ -60,11 +79,15 @@ function CreateReel() {
                         placeholder="Write a description..."
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        required
                     />
 
                     <div className="actions-row">
                         <label htmlFor="video-upload" className="upload-icon">
-                            <i class="bi bi-camera-reels"></i>
+                            <i className="bi bi-camera-reels"></i>
+                            {video && <span style={{ marginLeft: '8px', fontSize: '12px' }}>
+                                {video.name}
+                            </span>}
                         </label>
                         <input
                             id="video-upload"
@@ -72,6 +95,7 @@ function CreateReel() {
                             accept="video/*"
                             onChange={(e) => setVideo(e.target.files[0])}
                             style={{ display: "none" }}
+                            required
                         />
 
                         <button type="submit" className="post-btn">

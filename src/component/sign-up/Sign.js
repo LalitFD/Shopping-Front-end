@@ -31,11 +31,12 @@ function Sign() {
                 username: "",
                 password: ""
             });
+            nevigate("/log-in");
+
         } catch (err) {
             console.error(err);
             if (err.response && err.response.data && err.response.data.message) {
                 toast.error(err.response.data.message);
-                nevigate("/log-in");
 
 
             } else {

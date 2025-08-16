@@ -1,0 +1,219 @@
+/* Paste all your styles from the <style> tag here */
+/* No changes made to your original CSS */
+.reels-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  z-index: 2000;
+}
+.reels-back-btn:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+.reels-main-container {
+  width: 30vw;
+  height: 100vh;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.reels-video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  outline: none;
+}
+.reels-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000;
+}
+.reels-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.reels-play-button {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reels-actions-sidebar {
+  position: absolute;
+  right: 16px;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.reels-action-btn {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.reels-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: scale(1.1);
+}
+.reels-bottom-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 80px;
+  padding: 24px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+.reels-info-content {
+  color: white;
+}
+.reels-creator-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+.reels-description {
+  font-size: 16px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.reels-date {
+  font-size: 14px;
+  color: #ccc;
+}
+.reels-nav-controls {
+  position: relative;
+  bottom: 24px;
+  left: 95%;
+  top: -10%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+}
+.reels-nav-btn {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.reels-nav-btn:enabled {
+  background-color: white;
+  color: black;
+}
+.reels-nav-btn:enabled:hover {
+  background-color: #f0f0f0;
+}
+.reels-nav-btn:disabled {
+  background-color: #666;
+  color: #999;
+  cursor: not-allowed;
+}
+.reels-loading-container,
+.reels-error-container,
+.reels-empty-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reels-loading-content,
+.reels-error-content,
+.reels-empty-content {
+  text-align: center;
+  color: white;
+}
+.reels-spinner {
+  width: 48px;
+  height: 48px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: reels-spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes reels-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.reels-loading-text {
+  margin: 0;
+  font-size: 16px;
+}
+.reels-error-title {
+  color: #ff6b6b;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+.reels-error-message {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.reels-retry-btn {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.reels-retry-btn:hover {
+  background-color: #f0f0f0;
+}
+.reels-empty-text {
+  font-size: 16px;
+  margin: 0;
+}
+.reels-like-active {
+  color: #ff3040 !important;
+  fill: #ff3040;
+}
+.reels-like-inactive {
+  color: white;
+}
+.reels-create-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: #ff3040;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2000;
+  transition: background-color 0.2s ease;
+}
+.reels-create-btn:hover {
+  background-color: #e02435;
+}

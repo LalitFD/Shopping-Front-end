@@ -3,6 +3,7 @@ import "./HomePage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { isUserExist } from "../auth/Auth";
 import image from "../createStory/m.jpg"
+import profile from "./pro.jpg"
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ const HomePage = () => {
                     <div className="hero-buttons">
                         {!isUserExist() && <button className="register" onClick={handleSign}>Register Now</button>}
                         <button className="message" onClick={handleDash}>
-                            <i className="bi bi-chat-left"></i> Message
+                            Click Here  <i class="bi bi-arrow-right-circle"></i>
                         </button>
                     </div>
                     <div className="profile-icons">
