@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import myImage from "./m.jpg"
-import "./CreateReel.css"
+import myImage from "./m.jpg";
+import "./CreateReel.css";
 import { BASE_URL } from "../../api/End_Points";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ function CreateReel() {
     const [description, setDescription] = useState("");
     const [video, setVideo] = useState(null);
 
-    const nevigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,17 +32,17 @@ function CreateReel() {
 
             const response = await axios.post(`${BASE_URL}/reel/reels`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
                 },
                 withCredentials: true,
             });
 
             if (response.data.success) {
                 toast.success("Reel uploaded successfully!");
-                nevigate("/reel")
+                navigate("/reel");
                 setDescription("");
                 setVideo(null);
-                document.getElementById('video-upload').value = '';
+                document.getElementById("video-upload").value = "";
             }
         } catch (error) {
             console.error("Error uploading reel:", error);
@@ -56,38 +56,44 @@ function CreateReel() {
     };
 
     return (
-        <div className="create-post-container">
-            <h2 className="page-title" style={{ position: "relative", left: "-25%" }}>Create Reel</h2>
-            <p className="page-subtitle" style={{ position: "relative", left: "-25%" }}>Share your moments with friends</p>
+        <div className="create-reel-container">
+            <h2 className="create-reel-title" style={{ position: "relative", left: "-25%" }}>
+                Create Reel
+            </h2>
+            <p className="create-reel-subtitle" style={{ position: "relative", left: "-25%" }}>
+                Share your moments with friends
+            </p>
 
-            <div className="post-card">
-                <div className="user-info">
+            <div className="create-reel-card">
+                <div className="create-reel-user-info">
                     <img
                         src={myImage}
                         alt="User"
-                        className="user-avatar"
+                        className="create-reel-user-avatar"
                     />
                     <div>
-                        <h4 className="user-name">Lalit Doriya</h4>
-                        <p className="user-email">doriyalalit8@gmail.com</p>
+                        <h4 className="create-reel-user-name">Lalit Doriya</h4>
+                        <p className="create-reel-user-email">doriyalalit8@gmail.com</p>
                     </div>
                 </div>
 
                 <form onSubmit={handleSubmit}>
                     <textarea
-                        className="post-input"
+                        className="create-reel-input"
                         placeholder="Write a description..."
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
 
-                    <div className="actions-row">
-                        <label htmlFor="video-upload" className="upload-icon">
+                    <div className="create-reel-actions">
+                        <label htmlFor="video-upload" className="create-reel-upload-icon">
                             <i className="bi bi-camera-reels"></i>
-                            {video && <span style={{ marginLeft: '8px', fontSize: '12px' }}>
-                                {video.name}
-                            </span>}
+                            {video && (
+                                <span style={{ marginLeft: "8px", fontSize: "12px" }}>
+                                    {video.name}
+                                </span>
+                            )}
                         </label>
                         <input
                             id="video-upload"
@@ -98,7 +104,7 @@ function CreateReel() {
                             required
                         />
 
-                        <button type="submit" className="post-btn">
+                        <button type="submit" className="create-reel-btn">
                             Post Reel
                         </button>
                     </div>
