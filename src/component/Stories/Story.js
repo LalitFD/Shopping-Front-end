@@ -1,9 +1,11 @@
-// Story.js - Updated to show multiple stories of a user
+// Story.js - Updated to show multiple stories of a user with delete functionality
 
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import userProfile from "../profile/m.jpg"
 import End_Points, { BASE_URL } from "../../api/End_Points";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function Story() {
     const { userId } = useParams();
@@ -15,6 +17,10 @@ function Story() {
     const [imageError, setImageError] = useState(false);
     const [timeLeft, setTimeLeft] = useState(15);
     const [progress, setProgress] = useState(100);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+    // Get current user data for ownership check
+    const userData = JSON.parse(sessionStorage.getItem("Social-User") || "{}");
 
     useEffect(() => {
         const fetchUserStories = async () => {
@@ -70,6 +76,74 @@ function Story() {
         return () => clearInterval(timer);
     }, [currentStory, timeLeft, navigate, currentStoryIndex, userStories]);
 
+    // Delete story function
+    const handleDeleteStory = async () => {
+        if (!currentStory?._id) {
+            toast.error("Story ID not found!");
+            return;
+        }
+
+        // Check if current user owns this story
+        if (currentStory?.author?._id !== userData?._id) {
+            toast.error("You can only delete your own stories!");
+            return;
+        }
+
+        try {
+            const deleteUrl = `${BASE_URL}/story/stories/${currentStory._id}`;
+            console.log("Delete URL:", deleteUrl);
+
+            const response = await axios.delete(deleteUrl, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userData.token || sessionStorage.getItem('token') || ''}`,
+                }
+            });
+
+            console.log("Story deleted successfully:", response.data);
+            toast.success("Story deleted successfully!");
+
+            // Remove deleted story from array
+            const updatedStories = userStories.filter(story => story._id !== currentStory._id);
+
+            if (updatedStories.length === 0) {
+                // No more stories, go back
+                navigate(-1);
+                return;
+            }
+
+            // Update stories array
+            setUserStories(updatedStories);
+
+            // Adjust current index if needed
+            if (currentStoryIndex >= updatedStories.length) {
+                setCurrentStoryIndex(updatedStories.length - 1);
+            }
+
+            // Reset timer for current story
+            const duration = updatedStories[currentStoryIndex]?.media?.duration || 15;
+            setTimeLeft(duration);
+            setProgress(100);
+            setShowDeleteConfirm(false);
+
+        } catch (error) {
+            console.error("Error deleting story:", error);
+
+            if (error.response?.status === 404) {
+                toast.error("Story not found!");
+            } else if (error.response?.status === 401) {
+                toast.error("Authentication failed! Please login again.");
+                navigate('/login');
+            } else if (error.response?.status === 403) {
+                toast.error("You don't have permission to delete this story!");
+            } else {
+                toast.error(error.response?.data?.error || "Failed to delete story!");
+            }
+            setShowDeleteConfirm(false);
+        }
+    };
+
     // Navigation functions
     const goToNextStory = () => {
         if (currentStoryIndex < userStories.length - 1) {
@@ -124,6 +198,9 @@ function Story() {
     const isCloudinaryUrl = imageUrl?.startsWith('https://res.cloudinary.com/');
     const finalImageUrl = isCloudinaryUrl ? imageUrl : `${BASE_URL}${imageUrl}`;
 
+    // Check if current user owns this story
+    const canDeleteStory = currentStory?.author?._id === userData?._id;
+
     return (
         <div style={{
             position: 'fixed',
@@ -138,6 +215,7 @@ function Story() {
             justifyContent: 'center',
             zIndex: 1000
         }}>
+            {/* Progress bars */}
             <div style={{
                 position: 'absolute',
                 top: '10px',
@@ -165,29 +243,60 @@ function Story() {
                 ))}
             </div>
 
-            {/* Close Button */}
-            <button
-                onClick={handleClose}
-                style={{
-                    position: 'absolute',
-                    top: '20px',
-                    right: '20px',
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    border: 'none',
-                    color: 'white',
-                    fontSize: '24px',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 1001
-                }}
-            >
-                ×
-            </button>
+            {/* Top controls */}
+            <div style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                display: 'flex',
+                gap: '10px',
+                zIndex: 1001
+            }}>
+                {/* Delete Button - Only show if user owns the story */}
+                {canDeleteStory && (
+                    <button
+                        onClick={() => setShowDeleteConfirm(true)}
+                        style={{
+                            // background: 'rgba(255, 0, 0, 0.7)',
+                            border: 'none',
+                            // color: 'white',
+                            fontSize: '16px',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'background 0.2s'
+                        }}
+                    // onMouseEnter={(e) => e.target.style.background = 'rgba(255, 0, 0, 0.9)'}
+                    // onMouseLeave={(e) => e.target.style.background = 'rgba(255, 0, 0, 0.7)'}
+                    >
+                        <i class="bi bi-trash"></i>
+                    </button>
+                )}
+
+                {/* Close Button */}
+                <button
+                    onClick={handleClose}
+                    style={{
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        border: 'none',
+                        color: 'white',
+                        fontSize: '24px',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >
+                    ×
+                </button>
+            </div>
 
             {/* User Info */}
             <div style={{
@@ -228,7 +337,70 @@ function Story() {
                 </div>
             </div>
 
-            {/* <div
+            {/* Delete Confirmation Modal */}
+            {showDeleteConfirm && (
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1002
+                }}>
+                    <div style={{
+                        backgroundColor: '#1a1a1a',
+                        padding: '30px',
+                        borderRadius: '12px',
+                        textAlign: 'center',
+                        maxWidth: '300px',
+                        border: '1px solid #333'
+                    }}>
+                        <h3 style={{ color: 'white', marginBottom: '15px', fontSize: '18px' }}>
+                            Delete Story?
+                        </h3>
+                        <p style={{ color: '#a3a3a3', marginBottom: '25px', fontSize: '14px' }}>
+                            This action cannot be undone. Are you sure you want to delete this story?
+                        </p>
+                        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
+                            <button
+                                onClick={() => setShowDeleteConfirm(false)}
+                                style={{
+                                    padding: '10px 20px',
+                                    backgroundColor: '#666',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    fontSize: '14px'
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleDeleteStory}
+                                style={{
+                                    padding: '10px 20px',
+                                    backgroundColor: '#dc3545',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    fontSize: '14px'
+                                }}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Navigation areas */}
+            <div
                 onClick={handleLeftClick}
                 style={{
                     position: 'absolute',
@@ -262,7 +434,6 @@ function Story() {
                 )}
             </div>
 
-
             <div
                 onClick={handleRightClick}
                 style={{
@@ -295,7 +466,7 @@ function Story() {
                         ›
                     </div>
                 )}
-            </div> */}
+            </div>
 
             {/* Story Media */}
             <div style={{
@@ -365,7 +536,7 @@ function Story() {
                 fontSize: '14px',
                 textAlign: 'center'
             }}>
-                Tap anywhere to nevigate
+                {/* Tap sides to navigate */}
             </div>
         </div>
     );

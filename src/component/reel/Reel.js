@@ -177,12 +177,12 @@ const ReelsComponent = () => {
           <button onClick={toggleLike} className="reels-action-btn">
             <Heart size={24} className={isLiked ? 'reels-like-active' : 'reels-like-inactive'} />
           </button>
-          <button className="reels-action-btn">
+          {/* <button className="reels-action-btn">
             <MessageCircle size={24} color="white" />
-          </button>
-          <button className="reels-action-btn">
+          </button> */}
+          {/* <button className="reels-action-btn">
             <Share size={24} color="white" />
-          </button>
+          </button> */}
           <button onClick={toggleMute} className="reels-action-btn">
             {isMuted ? <VolumeX size={24} color="white" /> : <Volume2 size={24} color="white" />}
           </button>
@@ -200,7 +200,7 @@ const ReelsComponent = () => {
           </div>
         </div>
 
-        <div className="reels-nav-controls">
+        {/* <div className="reels-nav-controls">
           <button
             onClick={() => currentIndex > 0 && setCurrentIndex(prev => prev - 1)}
             disabled={currentIndex === 0}
@@ -215,7 +215,7 @@ const ReelsComponent = () => {
           >
             ↓ Next
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

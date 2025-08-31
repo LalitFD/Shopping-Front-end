@@ -22,7 +22,7 @@ function Main() {
 
     useEffect(() => {
         if (!userData || !userData._id) {
-            navigate('/login'); // Redirect to login if no user data
+            navigate('/login');
             return;
         }
     }, [userData, navigate]);
@@ -44,6 +44,28 @@ function Main() {
         });
 
         return Object.values(grouped);
+    };
+
+    // Function to get first letter of user's name
+    const getFirstLetter = (name) => {
+        if (!name || typeof name !== 'string') return '?';
+        return name.charAt(0).toUpperCase();
+    };
+
+    // Function to generate random background color for avatar
+    const getAvatarColor = (name) => {
+        const colors = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+            '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
+        ];
+        if (!name) return colors[0];
+
+        // Generate consistent color based on name
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+            hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return colors[Math.abs(hash) % colors.length];
     };
 
     const groupedStories = groupStoriesByAuthor(stories);
@@ -76,63 +98,62 @@ function Main() {
         fetchPosts();
     }, []);
 
-   const handleDelete = async (postId) => {
-    console.log("🔥 Full Post ID:", postId);
+    const handleDelete = async (postId) => {
+        console.log("🔥 Full Post ID:", postId);
 
-    const userData = JSON.parse(sessionStorage.getItem("Social-User") || "{}");
-    console.log("👤 Current User ID:", userData._id);
+        const userData = JSON.parse(sessionStorage.getItem("Social-User") || "{}");
+        console.log("👤 Current User ID:", userData._id);
 
-    const postToDelete = posts.find(p => p._id === postId);
-    console.log("📄 Post to delete:", postToDelete);
-    console.log("👤 Post Author ID:", postToDelete?.author?._id);
-    console.log("🔍 Author vs User match:", postToDelete?.author?._id === userData._id);
+        const postToDelete = posts.find(p => p._id === postId);
+        console.log("📄 Post to delete:", postToDelete);
+        console.log("👤 Post Author ID:", postToDelete?.author?._id);
+        console.log("🔍 Author vs User match:", postToDelete?.author?._id === userData._id);
 
-    if (postToDelete?.author?._id !== userData._id) {
-        console.log("❌ OWNERSHIP MISMATCH:");
-        console.log("Post belongs to:", postToDelete?.author?.username || "Unknown");
-        console.log("Current user:", userData.username || "Unknown");
-        toast.error("You can only delete your own posts!");
-        return;
-    }
-
-    try {
-        const deleteUrl = `${BASE_URL}/api/deletePost/${postId}`;
-        console.log("🔗 Delete URL:", deleteUrl);
-
-        const response = await axios.delete(deleteUrl, {
-            withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json',
-                // Add authorization header if you have a token
-                'Authorization': `Bearer ${userData.token || sessionStorage.getItem('token') || ''}`,
-            }
-        });
-
-        console.log("✅ Delete Success:", response.data);
-        
-        // Remove the deleted post from state
-        setPosts((prevPosts) => prevPosts.filter((p) => p._id !== postId));
-        toast.success("Post deleted successfully!");
-        setMenuOpen(null);
-
-    } catch (err) {
-        console.error("❌ Delete Error:", err.response?.data || err.message);
-
-        if (err.response?.status === 404) {
-            toast.error("Post not found or you're not authorized to delete this post!");
-            // Refetch posts to sync with server state
-            window.location.reload(); // Or call fetchPosts() if you extract it to a separate function
-        } else if (err.response?.status === 401) {
-            toast.error("Authentication failed! Please login again.");
-            // Redirect to login
-            navigate('/login');
-        } else if (err.response?.status === 403) {
-            toast.error("You don't have permission to delete this post!");
-        } else {
-            toast.error(err.response?.data?.error || "Failed to delete post!");
+        if (postToDelete?.author?._id !== userData._id) {
+            console.log("❌ OWNERSHIP MISMATCH:");
+            console.log("Post belongs to:", postToDelete?.author?.username || "Unknown");
+            console.log("Current user:", userData.username || "Unknown");
+            toast.error("You can only delete your own posts!");
+            return;
         }
-    }
-};
+
+        try {
+            const deleteUrl = `${BASE_URL}/api/deletePost/${postId}`;
+            console.log("🔗 Delete URL:", deleteUrl);
+
+            const response = await axios.delete(deleteUrl, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add authorization header if you have a token
+                    'Authorization': `Bearer ${userData.token || sessionStorage.getItem('token') || ''}`,
+                }
+            });
+
+            console.log("✅ Delete Success:", response.data);
+
+            // Remove the deleted post from state
+            setPosts((prevPosts) => prevPosts.filter((p) => p._id !== postId));
+            toast.success("Post deleted successfully!");
+            setMenuOpen(null);
+
+        } catch (err) {
+            console.error("❌ Delete Error:", err.response?.data || err.message);
+
+            if (err.response?.status === 404) {
+                toast.error("Post not found or you're not authorized to delete this post!");
+                window.location.reload();
+            } else if (err.response?.status === 401) {
+                toast.error("Authentication failed! Please login again.");
+                // Redirect to login
+                navigate('/login');
+            } else if (err.response?.status === 403) {
+                toast.error("You don't have permission to delete this post!");
+            } else {
+                toast.error(err.response?.data?.error || "Failed to delete post!");
+            }
+        }
+    };
     const handleLike = async (postId) => {
         try {
             const response = await axios.put(`${BASE_URL}/api/like/${postId}`, {}, {
@@ -244,7 +265,7 @@ function Main() {
                                 </div>
                             </div>
 
-                            {/* Grouped stories render */}
+                            {/* Grouped stories render with first letter avatars */}
                             {groupedStories.map((userStories, index) => (
                                 userStories.author && userStories.author._id && (
                                     <div
@@ -255,11 +276,26 @@ function Main() {
                                         }}
                                     >
                                         <div className="dashboard-avatar-circle" style={{ position: 'relative' }}>
-                                            <img
-                                                src={userStories.author?.profilePic || img}
-                                                className="dashboard-story-img"
-                                                alt={userStories.author?.name || 'User'}
-                                            />
+                                            {/* First Letter Avatar */}
+                                            <div
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    borderRadius: '50%',
+                                                    // backgroundColor: getAvatarColor(userStories.author?.name),
+                                                    backgroundColor: "black",
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: '24px',
+                                                    fontWeight: 'bold',
+                                                    color: 'white',
+                                                    border: '1px solid #fff',
+                                                    cursor: 'pointer'
+                                                }}
+                                            >
+                                                {getFirstLetter(userStories.author?.name)}
+                                            </div>
                                         </div>
                                         <div className="dashboard-username-label">
                                             {userStories?.author?.name || 'Unknown User'}
@@ -278,7 +314,24 @@ function Main() {
                                             <div className="dashboard-post-header">
                                                 <div className="dashboard-user-info">
                                                     <div className="dashboard-user-avatar">
-                                                        <img src={img} alt="User" className="dashboard-story-img" />
+                                                        {/* First Letter Avatar for posts */}
+                                                        <div
+                                                            style={{
+                                                                width: '40px',
+                                                                height: '40px',
+                                                                borderRadius: '50%',
+                                                                backgroundColor: getAvatarColor(post?.author?.name || post?.author?.username),
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                fontSize: '16px',
+                                                                fontWeight: 'bold',
+                                                                color: 'white',
+                                                                border: '1px solid #333'
+                                                            }}
+                                                        >
+                                                            {getFirstLetter(post?.author?.name || post?.author?.username)}
+                                                        </div>
                                                     </div>
                                                     <div className="dashboard-user-handle">
                                                         {post?.author?.username || "Unknown"}
@@ -461,7 +514,24 @@ function Main() {
                     <div className="dashboard-right-sidebar">
                         <div className="dashboard-profile-section">
                             <div className="dashboard-profile-avatar">
-                                <img src={img} alt="Profile" className="dashboard-profile-img" />
+                                {/* Current user's first letter avatar */}
+                                <div
+                                    style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        borderRadius: '50%',
+                                        backgroundColor: getAvatarColor(userData?.name || userData?.username),
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '20px',
+                                        fontWeight: 'bold',
+                                        color: 'white',
+                                        border: '2px solid #333'
+                                    }}
+                                >
+                                    {getFirstLetter(userData?.name || userData?.username)}
+                                </div>
                             </div>
                             <div className="dashboard-profile-text">
                                 <div className="dashboard-profile-name">{userData.email || 'User Email'}</div>
@@ -477,7 +547,23 @@ function Main() {
                         <div className="dashboard-suggestion">
                             <div className="dashboard-suggestion-user">
                                 <div className="dashboard-suggestion-avatar">
-                                    <img src={img} alt="User" className="dashboard-suggestion-img" />
+                                    <div
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                            borderRadius: '50%',
+                                            backgroundColor: getAvatarColor('beinglalit_0007'),
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '16px',
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            border: '1px solid #333'
+                                        }}
+                                    >
+                                        B
+                                    </div>
                                 </div>
                                 <div className="dashboard-suggestion-username">beinglalit_0007</div>
                             </div>
@@ -487,7 +573,23 @@ function Main() {
                         <div className="dashboard-suggestion">
                             <div className="dashboard-suggestion-user">
                                 <div className="dashboard-suggestion-avatar">
-                                    <img src={img} alt="User" className="dashboard-suggestion-img" />
+                                    <div
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                            borderRadius: '50%',
+                                            backgroundColor: getAvatarColor('beinglalit_0007'),
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '16px',
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            border: '1px solid #333'
+                                        }}
+                                    >
+                                        B
+                                    </div>
                                 </div>
                                 <div className="dashboard-suggestion-username">beinglalit_0007</div>
                             </div>
@@ -497,7 +599,23 @@ function Main() {
                         <div className="dashboard-suggestion">
                             <div className="dashboard-suggestion-user">
                                 <div className="dashboard-suggestion-avatar">
-                                    <img src={img} alt="User" className="dashboard-suggestion-img" />
+                                    <div
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                            borderRadius: '50%',
+                                            backgroundColor: getAvatarColor('beinglalit_0007'),
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '16px',
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            border: '1px solid #333'
+                                        }}
+                                    >
+                                        B
+                                    </div>
                                 </div>
                                 <div className="dashboard-suggestion-username">beinglalit_0007</div>
                             </div>
@@ -507,7 +625,23 @@ function Main() {
                         <div className="dashboard-suggestion">
                             <div className="dashboard-suggestion-user">
                                 <div className="dashboard-suggestion-avatar">
-                                    <img src={img} alt="User" className="dashboard-suggestion-img" />
+                                    <div
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                            borderRadius: '50%',
+                                            backgroundColor: getAvatarColor('beinglalit_0007'),
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '16px',
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            border: '1px solid #333'
+                                        }}
+                                    >
+                                        B
+                                    </div>
                                 </div>
                                 <div className="dashboard-suggestion-username">beinglalit_0007</div>
                             </div>

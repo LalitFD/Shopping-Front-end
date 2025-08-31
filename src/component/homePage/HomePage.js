@@ -3,7 +3,10 @@ import "./HomePage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { isUserExist } from "../auth/Auth";
 import image from "../createStory/m.jpg"
-import profile from "./pro.jpg"
+// import profile from "./pro.jpg"
+import profile from "./p2.jpeg"
+// import profile from "./hinata shoyo.jpeg"
+// import profile from "./kuroo.jpeg" 
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -34,7 +37,7 @@ const HomePage = () => {
                 <ul className="nav-links">
                     <li>Home</li>
                     <li>Services</li>
-                    <li>About Us</li>
+                    <li >About Us</li>
                     <li>Contact</li>
                 </ul>
 
@@ -58,11 +61,10 @@ const HomePage = () => {
                         </button>
                     </div>
                     <div className="profile-icons">
-                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
-                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
-                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
-                        <img src={image} style={{ width: "50px", height: "50px", borderRadius: "50%", cursor: "pointer" }} />
-
+                        <img src={profile} style={{ width: "50px", height: "50px", border: "1.5px solid white", borderRadius: "50%", cursor: "pointer" }} />
+                        <img src={profile} style={{ width: "50px", height: "50px", border: "1.5px solid white", borderRadius: "50%", cursor: "pointer" }} />
+                        <img src={profile} style={{ width: "50px", height: "50px", border: "1.5px solid white", borderRadius: "50%", cursor: "pointer" }} />
+                        <img src={profile} style={{ width: "50px", height: "50px", border: "1.5px solid white", borderRadius: "50%", cursor: "pointer" }} />
                     </div>
                 </div>
 

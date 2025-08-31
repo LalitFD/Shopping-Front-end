@@ -217,3 +217,31 @@
 .reels-create-btn:hover {
   background-color: #e02435;
 }
+
+
+.reels-scroll-indicator {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.reels-scroll-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reels-dot {
+  width: 4px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.reels-dot.active {
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 25px;
+}

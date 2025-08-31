@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import myImage from "./m.jpg";
+import myImage from "./m.jpg"; // Default image as fallback
 import "./CreateReel.css";
 import { BASE_URL } from "../../api/End_Points";
 import { toast } from "react-toastify";
@@ -9,19 +9,55 @@ import { useNavigate } from "react-router-dom";
 function CreateReel() {
     const [description, setDescription] = useState("");
     const [video, setVideo] = useState(null);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
+
+    // User data fetch karo session/localStorage se ya API call se
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                // Option 1: Session storage se get karo
+                const userData = JSON.parse(sessionStorage.getItem('Social-User') || '{}');
+
+                if (userData && userData._id) {
+                    setUser(userData);
+                    setLoading(false);
+                } else {
+                    // Option 2: API call se fresh data fetch karo
+                    const response = await axios.get(`${BASE_URL}/user/profile`, {
+                        withCredentials: true
+                    });
+
+                    if (response.data.userProfile) {
+                        setUser(response.data.userProfile);
+                        // Session में store kar do for future use
+                        sessionStorage.setItem('Social-User', JSON.stringify(response.data.userProfile));
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                toast.error("Please login again");
+                navigate("/login");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!video) {
-            alert("Please select a video file");
+            toast.error("Please select a video file");
             return;
         }
 
         if (!description.trim()) {
-            alert("Please enter a description");
+            toast.error("Please enter a description");
             return;
         }
 
@@ -49,10 +85,32 @@ function CreateReel() {
 
             if (error.response?.data?.error) {
                 toast.error(error.response.data.error);
+            } else if (error.response?.status === 401) {
+                toast.error("Please login again");
+                navigate("/login");
             } else {
                 toast.error("Failed to upload reel");
             }
         }
+    };
+
+    // Loading state
+    if (loading) {
+        return (
+            <div className="create-reel-container">
+                <div style={{ textAlign: 'center', padding: '50px' }}>
+                    <p>Loading...</p>
+                </div>
+            </div>
+        );
+    }
+
+    // User profile image path
+    const getUserProfileImage = () => {
+        if (user?.profile?.imageName) {
+            return `${BASE_URL}/profile/${user.profile.imageName}`;
+        }
+        return myImage;
     };
 
     return (
@@ -67,13 +125,20 @@ function CreateReel() {
             <div className="create-reel-card">
                 <div className="create-reel-user-info">
                     <img
-                        src={myImage}
+                        src={getUserProfileImage()}
                         alt="User"
                         className="create-reel-user-avatar"
+                        onError={(e) => {
+                            e.target.src = myImage;
+                        }}
                     />
                     <div>
-                        <h4 className="create-reel-user-name">Lalit Doriya</h4>
-                        <p className="create-reel-user-email">doriyalalit8@gmail.com</p>
+                        <h4 className="create-reel-user-name">
+                            {user?.name || 'User'}
+                        </h4>
+                        <p className="create-reel-user-email">
+                            {user?.email || 'user@example.com'}
+                        </p>
                     </div>
                 </div>
 

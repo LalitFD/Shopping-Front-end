@@ -51,18 +51,13 @@
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    border: 3px solid #ff3040;
+    /* border: 2px solid #333; */
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 8px;
-    background: linear-gradient(45deg,
-            #f09433 0%,
-            #e6683c 25%,
-            #dc2743 50%,
-            #cc2366 75%,
-            #bc1888 100%);
-    padding: 3px;
+    background-color: #e60c0c;
+    padding: 2px;
 }
 
 .dashboard-story-img {
@@ -78,15 +73,6 @@
     color: #a3a3a3;
     text-align: center;
     margin-top: 5px;
-}
-
-.dashboard-story-list::-webkit-scrollbar {
-    height: 6px;
-}
-
-.dashboard-story-list::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
 }
 
 .dashboard-post-card {
@@ -141,7 +127,6 @@
     background: none;
     border: none;
     padding: 8px;
-
     transition: background-color 0.2s;
 }
 
@@ -396,6 +381,7 @@
     font-size: 16px;
 }
 
+/* Scrollbar Styles */
 .dashboard-feed::-webkit-scrollbar,
 .dashboard-right-sidebar::-webkit-scrollbar {
     width: 6px;
@@ -434,7 +420,7 @@
     background: #555555;
 }
 
-/* Enhanced Responsive Design */
+/* Responsive Design */
 @media (max-width: 1400px) {
     .dashboard-right-sidebar {
         width: 300px;
@@ -445,7 +431,6 @@
     .dashboard-right-sidebar {
         width: 280px;
     }
-
     .dashboard-main-content {
         gap: 20px;
         padding: 15px;
@@ -456,15 +441,12 @@
     .dashboard-right-sidebar {
         width: 260px;
     }
-
     .dashboard-post-media {
         height: 350px;
     }
-
     .dashboard-story-item {
         width: 65px;
     }
-
     .dashboard-avatar-circle {
         width: 65px;
         height: 65px;
@@ -477,13 +459,11 @@
         height: auto;
         min-height: 100vh;
     }
-
     .dashboard-main-content {
         flex-direction: column;
         gap: 15px;
         padding: 10px;
     }
-
     .dashboard-right-sidebar {
         width: 100%;
         height: auto;
@@ -491,12 +471,10 @@
         order: -1;
         margin-bottom: 15px;
     }
-
     .dashboard-feed {
         max-height: none;
         padding: 15px;
     }
-
     .dashboard-messages-btn {
         position: relative;
         bottom: auto;
@@ -504,20 +482,16 @@
         right: auto;
         margin-top: 20px;
     }
-
     .dashboard-post-media {
         height: 300px;
     }
-
     .dashboard-story-list {
         gap: 12px;
         padding: 10px;
     }
-
     .dashboard-story-item {
         width: 60px;
     }
-
     .dashboard-avatar-circle {
         width: 60px;
         height: 60px;
@@ -529,59 +503,46 @@
         padding: 8px;
         gap: 10px;
     }
-
     .dashboard-feed {
         padding: 12px;
         border-radius: 8px;
     }
-
     .dashboard-right-sidebar {
         padding: 15px;
         border-radius: 8px;
     }
-
     .dashboard-post-card {
         border-radius: 8px;
         margin-bottom: 20px;
     }
-
     .dashboard-post-header {
         padding: 12px 15px;
     }
-
     .dashboard-post-controls {
         padding: 12px 15px 6px;
         gap: 15px;
     }
-
     .dashboard-post-stats {
         padding: 0 15px 6px;
     }
-
     .dashboard-post-caption {
         padding: 0 15px 12px;
     }
-
     .dashboard-post-media {
         height: 280px;
     }
-
     .dashboard-story-list {
         gap: 10px;
         padding: 8px;
         margin-bottom: 20px;
     }
-
     .dashboard-story-item {
         width: 55px;
     }
-
     .dashboard-avatar-circle {
         width: 55px;
         height: 55px;
-        border: 2px solid #ff3040;
     }
-
     .dashboard-username-label {
         font-size: 0.7rem;
     }
@@ -591,39 +552,31 @@
     .dashboard-main-content {
         padding: 5px;
     }
-
     .dashboard-feed {
         padding: 10px;
     }
-
     .dashboard-right-sidebar {
         padding: 12px;
     }
-
     .dashboard-post-media {
         height: 250px;
     }
-
     .dashboard-story-item {
-        width: 50px;
+        width: 60px;
     }
-
     .dashboard-avatar-circle {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
-
     .dashboard-user-handle,
     .dashboard-username,
     .dashboard-likes,
     .dashboard-caption-text {
         font-size: 0.85rem;
     }
-
     .dashboard-profile-name {
         font-size: 0.9rem;
     }
-
     .dashboard-suggestion-username {
         font-size: 0.85rem;
     }
@@ -635,16 +588,13 @@
         height: auto;
         min-height: 100vh;
     }
-
     .dashboard-feed {
         max-height: none;
     }
-
     .dashboard-right-sidebar {
         height: auto;
         max-height: none;
     }
-
     .dashboard-post-media {
         height: 200px;
     }

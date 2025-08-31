@@ -205,7 +205,7 @@ function Profile() {
                             key={post._id || index}
                             onMouseEnter={() => setHoveredPost(post._id)}
                             onMouseLeave={() => setHoveredPost(null)}
-                            style={{ position: 'relative', cursor: 'pointer' }}
+                            style={{ position: 'relative', cursor: 'pointer', border:"0.5px solid white"}}
                         >
                             {post.media && post.media.length > 0 ? (
                                 post.media[0].type === 'video' ? (
