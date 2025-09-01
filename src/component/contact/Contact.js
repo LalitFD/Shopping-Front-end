@@ -5,6 +5,7 @@ function Contact() {
             <h2>
                 Get In <span className="highlight">Touch</span>
             </h2>
+
             <p>
                 Ready to transform your social media presence? Let's start a conversation about how we can help your business grow.
             </p>
@@ -58,6 +59,7 @@ function Contact() {
                     <textarea placeholder="Tell us about Your Project..."></textarea>
                     <button type="submit">Send Message</button>
                 </form>
+                
             </div>
         </div>
     </>

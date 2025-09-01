@@ -81,7 +81,9 @@ function Login() {
                     <h3 style={{ color: "black" }}>Welcome again 👋</h3>
                     <h2 style={{ color: "black" }}>Login</h2>
                     <form onSubmit={handleSubmit}>
+
                         {/* If backend uses email for login, change placeholder to Email */}
+                        
                         <input
                             value={state.email}
                             onChange={(event) => setState({ ...state, email: event.target.value })}

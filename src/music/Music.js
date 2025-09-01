@@ -22,7 +22,7 @@ function Music() {
 
     const defaultSongs = [
         {
-            name: "hum tumse na kuch keh sake",
+            name: "hum tumse na kuch keh",
             artists: [{ name: "Hariharan, Krishnan Nair"}],
             album: {
                 images: [{ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZfsFSD4uzMrArgmYcQubR2nNZalwFtTxrXA&s" }]
@@ -30,7 +30,7 @@ function Music() {
             preview_url: first
         },
         {
-            name: "ankhiyon ke jharokhon se",
+            name: "ankhiyon ke jharokhon",
             artists: [{ name: "हेमलता" }],
             album: {
                 images: [{ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSi_0La9K-yDDYIMfPKkynBIhh_PSO0uhR_w&s" }]
@@ -70,8 +70,8 @@ function Music() {
             preview_url: sixth
         },
         {
-            name: "kah do ki tum ho meri varna",
-            artists: [{ name: "Anuradha Paudwal and Amit Kumar" }],
+            name: "kah do ki tum ho meri",
+            artists: [{ name: "Anuradha Paudwal" }],
             album: {
                 images: [{ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOJQdezTXgzfnyavSyKnz37yIiqWMXgBP7g&s" }]
             },
