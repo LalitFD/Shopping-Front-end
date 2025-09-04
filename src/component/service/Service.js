@@ -3,47 +3,47 @@ import './Service.css';
 function Service() {
     return <>
         <section className="services-section">
-            <h2 style={{ color: "#5FD13C" }}><span className="highlight">Our</span> Services</h2>
+            <h2 style={{ color: "#5FD13C" }}><span className="highlight">Our</span> Features</h2>
             <p className="subtext">
-                Comprehensive social media management solutions designed to help your brand grow and engage with your audience effectively.
+                Everything you need to connect, share, and grow with your community.
             </p>
 
             <div className="services-cards">
                 <div className="card">
                     <div className="icon">📅</div>
-                    <h3>Content <span className="error">Scheduling</span></h3>
+                    <h3>Create &<span className="error">Share</span></h3>
                     <p>
-                        Plan and schedule your content across all platforms with our intuitive scheduling tools and calendar view.
+                        Post photos, videos, and stories to express yourself and share moments with your friends and followers.
                     </p>
                 </div>
 
                 <div className="card">
                     <div className="icon">📊</div>
-                    <h3>Analytics Reporting</h3>
+                    <h3>Connect & Chat</h3>
                     <p>
-                        Get detailed insights and performance metrics to understand your audience and optimize your strategy.
+                        Follow people, send direct messages, and stay in touch with your community in real time.
                     </p>
                 </div>
 
                 <div className="card">
                     <div className="icon">💬</div>
-                    <h3>Social Inbox Management</h3>
+                    <h3>Discover Content</h3>
                     <p>
-                        Manage all your social media conversations in one place with our unified inbox and response tools.
+                        Explore trending posts, hashtags, and creators to find what inspires you.
                     </p>
                 </div>
 
                 <div className="card">
                     <div className="icon">📈</div>
-                    <h3>Growth Strategy</h3>
+                    <h3>Grow Your Profile</h3>
                     <p>
-                        Develop data-driven growth strategies with our expert recommendations and trend analysis.
+                        Build your audience with likes, comments, and followers, and showcase your creativity to the world.
                     </p>
                 </div>
             </div>
 
             <button className="explore-btn">Explore More</button>
-            <p className="footer-text">Ready to transform your social media presence?</p>
+            <p className="footer-text">Ready to dive into your social media journey?</p>
         </section>
     </>
 }

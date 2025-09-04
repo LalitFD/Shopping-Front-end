@@ -48,16 +48,15 @@ const HomePage = () => {
             <section className="hero">
                 <div className="hero-text">
                     <h1>
-                        MEET SOCIAL media <br /> expert in <span>tzz</span><span className="dot">.</span>
+                        MEET YOUR SOCIAL <br />media world <span>🌍</span><span className="dot">.</span>
                     </h1>
                     <p>
-                        Efficiently handle your social media accounts with Agorapulse's inbox,
-                        helping you stay organized, save time, and manage your channels with ease.
+                        Create posts, follow friends, explore trending content, and grow your network. Our platform makes it easy to share ideas, express yourself, and stay connected with the people that matter.
                     </p>
                     <div className="hero-buttons">
-                        {!isUserExist() && <button className="register" onClick={handleSign}>Register Now</button>}
+                        {!isUserExist() && <button className="register" onClick={handleSign}>🚀 Join Now</button>}
                         <button className="message" onClick={handleDash}>
-                            Click Here  <i class="bi bi-arrow-right-circle"></i>
+                            🫡 Explore Feed<i class="bi bi-arrow-right-circle"></i>
                         </button>
                     </div>
                     <div className="profile-icons">

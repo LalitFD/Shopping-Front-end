@@ -8,23 +8,23 @@ function Aboutus() {
         <section className="about-section">
             <h2><span className="highlight">About</span> Us</h2>
             <p className="subtext">
-                We're passionate about helping businesses grow their social media presence with cutting-edge technology and expert insights.
+                We’re passionate about building a space where people can connect, share, and grow together.
             </p>
 
             <div className="about-content">
                 <div className="about-text">
-                    <h3>Empowering Your Digital Journey</h3>
+                    <h3>Empowering Your Social Journey</h3>
                     <p>
-                        Founded in 2020, Social. has been at the forefront of social media management innovation. Our team of experts understands the ever-changing landscape of social platforms and helps businesses navigate the complexities of digital marketing.
+                        Launched with a simple idea — to bring people closer through digital connections — our platform is designed for everyone who wants to share their voice, discover new content, and engage with communities that inspire them
                     </p>
                     <p>
-                        We believe that every brand has a unique story to tell. Our platform provides the tools and insights needed to tell that story effectively across all social media channels, driving engagement and building meaningful connections with your audience.
+                        We believe social media should be more than just posts. It’s about creating meaningful interactions, discovering ideas, and building lasting relationships
                     </p>
 
                     <div className="tags">
-                        <span className="tag green">AI Powered</span>
-                        <span className="tag light-green">Data-Driven</span>
-                        <span className="tag soft-green">User-Friendly</span>
+                        <span className="tag green">🌍 Global Community</span>
+                        <span className="tag light-green">⚡ Fast & Secure</span>
+                        <span className="tag soft-green">💡 Easy to Use</span>
                     </div>
                 </div>
 
@@ -36,23 +36,23 @@ function Aboutus() {
             <div className="stats">
                 <div className="stat">
                     <div className="icon">👥</div>
-                    <h4>10K+</h4>
-                    <p>Active Users</p>
+                    <h4>10</h4>
+                    <p style={{ position: "relative", top: "10%" ,left:"2%"}}>Active Users</p>
                 </div>
                 <div className="stat">
                     <div className="icon">📄</div>
-                    <h4>50M+</h4>
-                    <p>Post Managed</p>
+                    <h4>50</h4>
+                    <p style={{ position: "relative", top: "10%" ,left:"2%"}}>Post Managed</p>
                 </div>
                 <div className="stat">
                     <div className="icon">⚙️</div>
                     <h4>99%</h4>
-                    <p>Uptime</p>
+                    <p style={{ position: "relative", top: "10%" ,left:"2%"}}>Uptime</p>
                 </div>
                 <div className="stat">
                     <div className="icon">⚡</div>
                     <h4>24/7</h4>
-                    <p>Support</p>
+                    <p style={{ position: "relative", top: "10%" ,left:"2%"}}>Support</p>
                 </div>
             </div>
         </section>

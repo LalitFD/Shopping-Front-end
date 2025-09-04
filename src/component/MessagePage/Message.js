@@ -65,7 +65,7 @@ function Message() {
                 console.log("=== ALL USERS FROM BACKEND ===");
                 console.log("Total users:", userList.length);
                 console.log("Current user ID:", currentUser._id);
-                
+
                 userList.forEach((user, index) => {
                     console.log(`\n--- User ${index + 1} ---`);
                     console.log("ID:", user._id);
@@ -81,7 +81,7 @@ function Message() {
                 console.log("\n=== VERIFIED USERS ONLY ===");
                 const trueVerifiedUsers = userList.filter(user => user.isVerified === true);
                 console.log("True verified users count:", trueVerifiedUsers.length);
-                
+
                 trueVerifiedUsers.forEach((user, index) => {
                     console.log(`✅ Verified User ${index + 1}:`, {
                         id: user._id,
@@ -96,11 +96,11 @@ function Message() {
                 const verifiedUsers = userList.filter(user => {
                     const isNotCurrentUser = user._id !== currentUser._id;
                     const isVerified = user.isVerified === true;
-                    
+
                     if (isVerified && isNotCurrentUser) {
                         console.log(`🎯 Final filtered user: ${user.username || user.name}`);
                     }
-                    
+
                     return isNotCurrentUser && isVerified;
                 });
 
@@ -303,7 +303,7 @@ function Message() {
                 <div style={{ fontSize: "48px", marginBottom: "20px" }}>⚠️</div>
                 <div>Account Not Verified</div>
                 <div style={{ fontSize: "14px", marginTop: "10px", color: "#999", maxWidth: "400px" }}>
-                    Please verify your email account to access chat features. 
+                    Please verify your email account to access chat features.
                     Only verified users can send and receive messages.
                 </div>
                 <div style={{ fontSize: "12px", marginTop: "10px", color: "#999" }}>
@@ -336,14 +336,14 @@ function Message() {
                     // backgroundColor: "#fff"
                 }}>
                     <h4 style={{ margin: 0, color: "white" }}>
-                        Chats 
-                        <span style={{ 
-                            fontSize: "12px", 
-                            backgroundColor: "#4CAF50", 
-                            color: "white", 
-                            padding: "2px 6px", 
-                            borderRadius: "10px", 
-                            marginLeft: "8px" 
+                        Chats
+                        <span style={{
+                            fontSize: "12px",
+                            backgroundColor: "#4CAF50",
+                            color: "white",
+                            padding: "2px 6px",
+                            borderRadius: "10px",
+                            marginLeft: "8px"
                         }}>
                             ✓ Verified Only
                         </span>
@@ -352,9 +352,9 @@ function Message() {
                         Welcome, {currentUser.username}
                     </small>
                     <br />
-                    <small style={{ color: "white" }}>
+                    {/* <small style={{ color: "white" }}>
                         {users.length} verified user{users.length !== 1 ? 's' : ''} available
-                    </small>
+                    </small> */}
                 </div>
 
                 <div style={{ flex: 1, overflowY: "auto" }}>
@@ -393,8 +393,8 @@ function Message() {
                                 }}
                             >
                                 <div>
-                                    <div style={{ 
-                                        fontWeight: "500", 
+                                    <div style={{
+                                        fontWeight: "500",
                                         color: "#10dc62ff",
                                         display: "flex",
                                         alignItems: "center",
@@ -406,7 +406,7 @@ function Message() {
                                             fontSize: "12px",
                                             color: "#4CAF50"
                                         }}>
-                                            ✓
+
                                         </span>
                                     </div>
                                     <div style={{ fontSize: "12px", color: "#666" }}>
@@ -464,7 +464,7 @@ function Message() {
                     flex: 1,
                     padding: "20px",
                     overflowY: "auto",
-                    // backgroundColor: "#fafafa"
+                    backgroundColor: "#5f605fff"
                 }}>
                     {selectedUser ? (
                         messages.length > 0 ? (
