@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
 import './App.css';
 import { Router, Routes, Route } from 'react-router-dom';
 import Login from './component/log-in/Login.js';
@@ -41,11 +40,7 @@ function App() {
       <Route path='/Music' element={<Auth><Music /></Auth>} />
       <Route path='/profileUpdate' element={<ProfileUpdate />} />
       <Route path='/Stories' element={< StoryList />} />
-
-
       <Route path="/user-stories/:userId" caseSensitive={false} element={<Story />} />
-
-
       <Route path='/reel' element={<Reel />} />
       <Route path='/create-reel' element={<CreateReel />} />
     </Routes>

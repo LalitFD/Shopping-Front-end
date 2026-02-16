@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Heart, MessageCircle, Share, Volume2, VolumeX, ArrowLeft } from 'lucide-react';
+import { Play, Heart, Volume2, VolumeX, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../api/End_Points';
 import './Reel.css';
@@ -177,12 +177,6 @@ const ReelsComponent = () => {
           <button onClick={toggleLike} className="reels-action-btn">
             <Heart size={24} className={isLiked ? 'reels-like-active' : 'reels-like-inactive'} />
           </button>
-          {/* <button className="reels-action-btn">
-            <MessageCircle size={24} color="white" />
-          </button> */}
-          {/* <button className="reels-action-btn">
-            <Share size={24} color="white" />
-          </button> */}
           <button onClick={toggleMute} className="reels-action-btn">
             {isMuted ? <VolumeX size={24} color="white" /> : <Volume2 size={24} color="white" />}
           </button>
@@ -199,23 +193,6 @@ const ReelsComponent = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="reels-nav-controls">
-          <button
-            onClick={() => currentIndex > 0 && setCurrentIndex(prev => prev - 1)}
-            disabled={currentIndex === 0}
-            className="reels-nav-btn"
-          >
-            ↑ Prev
-          </button>
-          <button
-            onClick={() => currentIndex < reelsData.length - 1 && setCurrentIndex(prev => prev + 1)}
-            disabled={currentIndex === reelsData.length - 1}
-            className="reels-nav-btn"
-          >
-            ↓ Next
-          </button>
-        </div> */}
       </div>
     </div>
   );

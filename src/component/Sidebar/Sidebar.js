@@ -104,7 +104,20 @@ function Sidebar() {
           Create Post
         </NavLink>
 
-        
+        <div
+          style={{ marginTop: "5px" }}
+          className="sidebar-item logout-btn"
+          onClick={() => {
+            sessionStorage.removeItem("Social-User");
+            navigate("/");
+            window.location.reload();
+          }}
+        >
+          <span className="sidebar-item-icon">
+            <i className="bi bi-box-arrow-right"></i>
+          </span>
+          Logout
+        </div>
       </div>
     </div>
   );

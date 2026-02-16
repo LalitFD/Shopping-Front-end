@@ -1,5 +1,5 @@
 // export const BASE_URL = "https://shopping-beck-end.onrender.com";
-export const BASE_URL = "http://localhost:3000"
+export const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 // https://shopping-beck-end.onrender.com
 export default {
     SIGN_UP: BASE_URL + "/register",

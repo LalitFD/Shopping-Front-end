@@ -95,17 +95,18 @@ body {
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
-    /* Removed fixed height - let content determine height */
     min-height: 200px;
-    /* Minimum height instead of fixed */
 }
 
 .profile-title {
     color: #888;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    /* position: relative;
+    top:17%; */
+    font-weight: bolder;
 }
 
 .profile-info {

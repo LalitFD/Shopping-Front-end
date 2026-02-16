@@ -24,31 +24,45 @@
     background: #38a169;
 }
 
-/* Sidebar */
-    .sidebar {
-        width: clamp(200px, 20vw, 250px);
-        background-color: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 0.5rem;
-        margin: 1rem;
-        padding: 1rem;
-        height: calc(100vh - 1rem);
-        position: fixed;
-        top: 0;
-        left: 0;
-        transition: transform 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-    }
+/* Sidebar - Hide Scrollbar */
+.sidebar {
+    width: clamp(200px, 20vw, 250px);
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    padding: 1rem;
+    height: calc(100vh - 1rem);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+}
+
+/* Hide scrollbar for WebKit browsers */
+.sidebar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
 
 /* Logo */
 .logo {
     color: #4ade80;
     font-size: clamp(1.5rem, 3vw, 1.8rem);
     font-weight: 600;
-    margin-bottom: 0.8rem; 
-    padding: 0.3rem 0;    
+    margin-bottom: 0.8rem;
+    padding: 0.3rem 0;
     cursor: pointer;
     text-align: center;
 }
@@ -58,7 +72,7 @@
     display: flex;
     align-items: center;
     padding: 0.6rem 0.8rem;
-    margin-bottom: 0.15rem; 
+    margin-bottom: 0.15rem;
     border-radius: 0.4rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -84,6 +98,7 @@
 .create-btn {
     background-color: #fff;
     color: #000;
+    height: 45px;
     font-weight: bold;
     border-radius: 0.4rem;
     margin-top: 1rem;
@@ -142,4 +157,21 @@
     .create-btn {
         padding: 0.5rem;
     }
+}
+
+/* Logout button default style */
+.sidebar-item.logout-btn {
+    transition: all 0.3s ease-in-out;
+    height: 40px;
+    /* kam height */
+    display: flex;
+    align-items: center;
+}
+
+/* Hover effect */
+.sidebar-item.logout-btn:hover {
+    background-color: #dc3545;
+    /* Bootstrap red */
+    color: #fff;
+    cursor: pointer;
 }

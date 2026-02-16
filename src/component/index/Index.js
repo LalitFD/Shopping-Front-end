@@ -6,14 +6,11 @@ import Footer from '../footer/Footer.js';
 
 function Index() {
     return <>
-
         <HomePage />
         <Service />
         <Aboutus />
         <Contact />
         <Footer />
-
     </>
 }
-
 export default Index;
